@@ -460,9 +460,29 @@ function rDraw(){
  var fA=fillFac(pk(ALL_F)),fB=fillFac(pk(ALL_F));
  G.A.fac=fA;G.B.fac=fB;
  G.A.pk=pickUnique(fA.ids);G.B.pk=pickUnique(fB.ids);
- h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人</div>';
+ // Merge finger picks for G5 (replace auto-pick with finger)
+ if(isG5&&G.A.fi){
+ var fi=G.A.fi;
+ // Remove auto-pick of same sinner if exists, or remove last
+ var replaced=false;
+ for(var i=0;i<G.A.pk.length;i++){
+ if(sinner(G.A.pk[i])===sinner(fi)){G.A.pk[i]=fi;replaced=true;break;}
+ }
+ if(!replaced&&G.A.pk.length>0) G.A.pk[0]=fi;
+ }
+ if(isG5&&G.B.fi){
+ var fi=G.B.fi;
+ var replaced=false;
+ for(var i=0;i<G.B.pk.length;i++){
+ if(sinner(G.B.pk[i])===sinner(fi)){G.B.pk[i]=fi;replaced=true;break;}
+ }
+ if(!replaced&&G.B.pk.length>0) G.B.pk[0]=fi;
+ }
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
+ if(isG5&&G.A.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'A\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
+ h+='</div>';
  h+='<div style="font-size:22px;color:#475569;">⚡</div>';
- h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人</div></div>';
+ h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
  h+='<button class="btn btn-primary" onclick="goDone()">✅ 已自动选人，进入对战</button></div>';
  } else if(rk==='mirror'){
  var mp=ALL_F.filter(function(f){return f.ids.length>=6;});
