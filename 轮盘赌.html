@@ -11,45 +11,980 @@ body {
  background: #0a0f1a;
  color: #e2e8f0;
  min-height: 100vh;
- display: flex;
- align-items: center;
- justify-content: center;
- flex-direction: column;
- gap: 24px;
 }
-.header { text-align: center; }
+.header {
+ background: linear-gradient(135deg, #1a3a2a, #0f172a);
+ border-bottom: 1px solid #1e293b;
+ padding: 16px 20px;
+ text-align: center;
+}
 .header h1 {
- font-size: 28px;
- font-weight: 800;
+ font-size: 22px; font-weight: 800;
  background: linear-gradient(135deg, #22c55e, #f59e0b);
  -webkit-background-clip: text;
  -webkit-text-fill-color: transparent;
  background-clip: text;
 }
-.header .sub { font-size: 14px; color: #64748b; margin-top: 4px; }
-.nav-bar { position: fixed; top: 0; left: 0; right: 0; padding: 12px 20px; background: #0f172a; border-bottom: 1px solid #1e293b; }
-.nav-bar a { color: #64748b; text-decoration: none; font-size: 13px; }
-.nav-bar a:hover { color: #818cf8; }
-.status-box {
+.header .sub { font-size: 13px; color: #64748b; margin-top: 4px; }
+.container { max-width: 1400px; margin: 0 auto; padding: 12px 16px; }
+.section {
  background: #141b2d;
  border: 1px solid #1e293b;
  border-radius: 14px;
- padding: 40px 48px;
- text-align: center;
+ padding: 16px;
+ margin-bottom: 12px;
 }
-.status-box .icon { font-size: 64px; margin-bottom: 16px; }
-.status-box .msg { font-size: 18px; color: #94a3b8; }
+.section-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: #e2e8f0; }
+
+.btn {
+ padding: 9px 20px;
+ border: none;
+ border-radius: 10px;
+ font-family: inherit;
+ font-size: 14px;
+ font-weight: 600;
+ cursor: pointer;
+ transition: all 0.15s;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; filter: none; }
+.btn-primary { background: linear-gradient(135deg,#22c55e,#16a34a); color: #fff; }
+.btn-success { background: linear-gradient(135deg,#22c55e,#16a34a); color: #fff; }
+.btn-danger { background: linear-gradient(135deg,#ef4444,#dc2626); color: #fff; }
+.btn-warning { background: linear-gradient(135deg,#eab308,#ca8a04); color: #000; }
+.btn-gold { background: linear-gradient(135deg,#f59e0b,#d97706); color: #000; }
+.btn-finger { background: linear-gradient(135deg,#a855f7,#7c3aed); color: #fff; }
+
+.game-phase { display: none; }
+.game-phase.active { display: block; }
+
+.game-tabs {
+ display: flex;
+ gap: 8px;
+ margin-bottom: 12px;
+ flex-wrap: wrap;
+}
+.game-tab {
+ padding: 8px 16px;
+ border-radius: 8px;
+ font-size: 13px;
+ font-weight: 600;
+ cursor: pointer;
+ border: 1px solid #1e293b;
+ background: #0f172a;
+ color: #64748b;
+}
+.game-tab.active { background: #1a3a2a; border-color: #22c55e; color: #e2e8f0; }
+.game-tab.played { background: #141b2d; color: #22c55e; border-color: #22c55e; }
+
+.step-bar {
+ display: flex;
+ gap: 4px;
+ margin-bottom: 14px;
+ flex-wrap: wrap;
+ justify-content: center;
+}
+.step {
+ padding: 5px 12px;
+ border-radius: 6px;
+ font-size: 12px;
+ background: #0f172a;
+ color: #64748b;
+ border: 1px solid #1e293b;
+}
+.step.done { background: #1a3a2a; color: #22c55e; border-color: #22c55e; }
+.step.current { background: #1a3a2a; color: #f59e0b; border-color: #f59e0b; }
+
+/* Score */
+.score-bar {
+ display: flex; justify-content: center; gap: 20px; padding: 8px 0; align-items: center;
+}
+.score-box {
+ text-align: center; padding: 6px 18px; border-radius: 8px; background: #0f172a; border: 1px solid #1e293b; min-width: 80px;
+}
+.score-box .sb-label { font-size: 12px; color: #64748b; }
+.score-box .sb-val { font-size: 24px; font-weight: 800; }
+.score-box .sb-gold { font-size: 12px; color: #f59e0b; margin-top: 2px; }
+.score-box .sb-divider { font-size: 20px; font-weight: 700; color: #475569; }
+
+/* Roulette Wheel */
+.wheel-area {
+ display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0;
+}
+.wheel-spin {
+ width: 120px; height: 120px; border-radius: 50%;
+ background: conic-gradient(#22c55e 0deg 72deg, #eab308 72deg 144deg, #a855f7 144deg 216deg, #3b82f6 216deg 288deg, #ef4444 288deg 360deg);
+ display: flex; align-items: center; justify-content: center;
+ font-size: 16px; font-weight: 800;
+ position: relative; transition: transform 1s ease-out;
+}
+.wheel-spin .inner {
+ width: 80px; height: 80px; border-radius: 50%;
+ background: #0f172a; display: flex; align-items: center; justify-content: center;
+ font-size: 13px; text-align: center; line-height: 1.3;
+ border: 2px solid #1e293b;
+}
+.wheel-result {
+ font-size: 24px; font-weight: 700; padding: 8px 24px;
+ border-radius: 10px; text-align: center;
+}
+.wheel-result.r1 { background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; }
+.wheel-result.r2 { background: rgba(234,179,8,0.15); border: 1px solid #eab308; color: #eab308; }
+.wheel-result.r3 { background: rgba(168,85,247,0.15); border: 1px solid #a855f7; color: #a855f7; }
+.wheel-result.r4 { background: rgba(59,130,246,0.15); border: 1px solid #3b82f6; color: #3b82f6; }
+.wheel-result.r5 { background: rgba(239,68,68,0.15); border: 1px solid #ef4444; color: #ef4444; }
+
+/* Draw */
+.draw-grid {
+ display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; width: 100%; max-width: 800px;
+}
+@media (max-width:700px) { .draw-grid { grid-template-columns: 1fr; } }
+.draw-card {
+ background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; min-width: 200px; text-align: center;
+}
+.draw-card .dc-faction { font-size: 18px; font-weight: 700; margin: 6px 0; }
+.draw-card .dc-tier { font-size: 13px; color: #64748b; }
+
+/* Character list */
+.char-list { display: flex; flex-direction: column; gap: 4px; max-height: 300px; overflow-y: auto; margin-top: 8px; }
+.char-item {
+ display: flex; align-items: center; gap: 8px;
+ padding: 6px 10px; border-radius: 6px;
+ background: rgba(255,255,255,0.03); border: 1px solid transparent;
+ cursor: pointer; transition: all 0.12s; font-size: 13px;
+}
+.char-item:hover { border-color: #334155; background: rgba(255,255,255,0.06); }
+.char-item.selected { border-color: #22c55e; background: rgba(34,197,94,0.08); opacity: 0.5; cursor: default; }
+.char-item .ci-id { font-size: 11px; color: #64748b; width: 50px; flex-shrink: 0; font-family: monospace; cursor: pointer; }
+.char-item .ci-name { flex: 1; }
+.char-item .ci-tag { font-size: 10px; padding: 1px 6px; border-radius: 4px; flex-shrink: 0; }
+.tag-finger-tag { background: #f472b6; color: #000; }
+
+/* Pick slots */
+.pick-area { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.pick-slot {
+ width: 100%; min-height: 40px; border-radius: 8px;
+ border: 2px dashed #334155;
+ display: flex; align-items: center; padding: 6px 12px; font-size: 13px; color: #64748b; position: relative;
+}
+.pick-slot.filled {
+ border-style: solid; border-color: #22c55e; background: rgba(34,197,94,0.1); color: #e2e8f0; cursor: pointer;
+}
+.pick-slot.filled .remove {
+ position: absolute; top: -6px; right: -6px; width: 18px; height: 18px; border-radius: 50%;
+ background: #ef4444; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.pick-slot .pick-id { font-size: 11px; color: #64748b; margin-right: 8px; flex-shrink: 0; }
+.pick-slot .pick-name { flex: 1; }
+
+/* Panels */
+.battle-setup {
+ display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: start;
+}
+@media (max-width:900px) { .battle-setup { grid-template-columns: 1fr; } }
+.player-panel {
+ background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 14px;
+}
+.player-panel .pp-header {
+ display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #1e293b;
+}
+.player-panel .pp-name { font-size: 15px; font-weight: 700; }
+.player-panel .pp-faction { font-size: 13px; color: #22c55e; }
+
+/* Dice */
+.dice-area {
+ display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 0; flex-wrap: wrap;
+}
+.dice-box {
+ width: 64px; height: 64px; border-radius: 12px;
+ background: #1e293b; border: 2px solid #334155;
+ display: flex; align-items: center; justify-content: center;
+ font-size: 32px; font-weight: 800;
+}
+.dice-box.winner { border-color: #22c55e; background: rgba(34,197,94,0.15); }
+
+/* Final */
+.final-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.final-card {
+ padding: 8px 14px; border-radius: 8px; background: rgba(34,197,94,0.08); border: 1px solid #22c55e; font-size: 13px;
+}
+.final-card .fc-id { font-size: 11px; color: #64748b; margin-right: 6px; cursor: pointer; }
+.final-card.finger-card { border-color: #f472b6; background: rgba(244,114,182,0.1); }
+
+/* Shop */
+.shop-grid {
+ display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+@media (max-width:800px) { .shop-grid { grid-template-columns: 1fr; } }
+.shop-column { }
+.shop-item {
+ display: flex; align-items: center; gap: 10px;
+ padding: 10px 14px; border-radius: 8px;
+ background: #0f172a; border: 1px solid #1e293b;
+ margin-bottom: 6px; cursor: pointer; transition: all 0.12s;
+}
+.shop-item:hover { border-color: #f59e0b; }
+.shop-item.bought { border-color: #22c55e; background: rgba(34,197,94,0.1); cursor: default; opacity: 0.7; }
+.shop-item .si-icon { font-size: 20px; }
+.shop-item .si-name { flex: 1; font-size: 13px; font-weight: 600; }
+.shop-item .si-price { font-size: 12px; color: #f59e0b; font-weight: 700; }
+.shop-item .si-desc { font-size: 11px; color: #64748b; width: 100%; margin-top: 2px; }
+.shop-header { font-size: 14px; font-weight: 700; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #1e293b; }
+
+/* Gold display */
+.gold-display {
+ display: inline-flex; align-items: center; gap: 4px;
+ padding: 3px 12px; border-radius: 12px;
+ background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3);
+ font-size: 14px; font-weight: 700; color: #f59e0b;
+}
+
+.status-area { text-align: center; padding: 12px 8px; font-size: 14px; color: #94a3b8; margin-top: 8px; }
+
+.toast {
+ position: fixed; bottom: 24px; left: 50%;
+ transform: translateX(-50%) translateY(80px);
+ background: #141b2d; border: 1px solid #1e293b; border-radius: 10px;
+ padding: 10px 18px; font-size: 14px;
+ box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+ opacity: 0; transition: all 0.3s ease;
+ z-index: 200; pointer-events: none; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-<div class="nav-bar"><a href="阵营赛.html">← 返回阵营赛</a></div>
 <div class="header">
  <h1>🎰 边狱巴士 · 轮盘赌</h1>
- <div class="sub">金币经济 · G5商店 · 一局定胜负</div>
+ <div class="sub">金币经济制 · 前4局攒钱 · 第5局花光 · 一局定胜负</div>
 </div>
-<div class="status-box">
- <div class="icon">🚧</div>
- <div class="msg">页面制作中，敬请期待</div>
+<div class="container">
+<div class="section" id="scoreSection" style="display:none;">
+ <div class="score-bar" id="scoreBar"></div>
 </div>
+<div id="gameSection" class="game-phase active">
+ <div class="game-tabs" id="gameTabs"></div>
+ <div class="step-bar" id="stepBar"></div>
+ <div id="wheelArea" class="section" style="display:none;"></div>
+ <div id="drawArea" class="section" style="display:none;"></div>
+ <div id="diceArea" class="dice-area" style="display:none;"></div>
+ <div id="pickArea" class="section" style="display:none;"></div>
+ <div id="resultArea" class="section" style="display:none;"></div>
+ <div id="shopArea" class="section" style="display:none;"></div>
+ <div class="status-area" id="statusArea"></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════ DATA ═══════════
+const P = {
+ 10103:'李箱 剑契组杀手',10104:'李箱 技术解放联盟',10106:'李箱 W公司2级清扫职员',
+ 10109:'李箱 环指点彩派学徒',10110:'李箱 脑叶公司E.G.O::庄严哀悼',
+ 10112:'李箱 六协会南部6科',10113:'李箱 N公司E.G.O::凶弹',10114:'李箱 黑兽-午魁首',
+ 10115:'李箱 蜘蛛巢食指父辈',10204:'浮士德 执柄者',10206:'浮士德 七协南部4科',
+ 10207:'浮士德 脑叶公司E.G.O::悔恨',10208:'浮士德 剑契组杀手',
+ 10210:'浮士德 多裂纹事务所代表',10211:'浮士德 LCE E.G.O::红艳煞',
+ 10212:'浮士德 黑兽-卯魁首',10213:'浮士德 四协会东部3科',10214:'浮士德 食指苦行僧',
+ 10215:'浮士德 蜘蛛巢环指子辈',10302:'堂吉诃德 W公司3级清扫人员',
+ 10305:'堂吉诃德 五协会南部5科科长',10306:'堂吉诃德 中指幼妹',
+ 10309:'堂吉诃德 T公司3级征收人员',10310:'堂吉诃德 拉·曼却领总督',
+ 10311:'堂吉诃德 五协会东部3科',10312:'堂吉诃德 脑叶公司E.G.O::以爱与憎之名',
+ 10313:'堂吉诃德 黑兽-未',10314:'堂吉诃德 食指代行者-绽放E.G.O::代行',
+ 10403:'良秀 黑云会若众',10404:'良秀 良·派厨师长',10405:'良秀 W公司3级清扫人员',
+ 10408:'良秀 埃德加家族首席管家',10410:'良秀 脑叶公司E.G.O::赤瞳·忏悔',
+ 10411:'良秀 黑兽-卯',10412:'良秀 N公司E.G.O::轻蔑，敬畏',10413:'良秀 鸿园的流浪武者',
+ 10414:'良秀 脑叶公司E.G.O::余香·孤独',10415:'良秀 蜘蛛巢之刃',
+ 10503:'默尔索 W公司2级清扫人员',10504:'默尔索 N公司大锤',
+ 10506:'默尔索 R公司第四集团军犀牛队',10508:'默尔索 剑契组头领',
+ 10510:'默尔索 十协会南部4科科长',10511:'默尔索 五协会西部3科',
+ 10512:'默尔索 拇指东部指挥官IIII',10513:'默尔索 拉·曼却领王子',
+ 10514:'默尔索 脑叶公司E.G.O::黄蜂【变调】',10515:'默尔索 环指野兽派学徒',
+ 10603:'鸿璐 豆豆帮帮主',10605:'鸿璐 K公司3级摘除人员',
+ 10608:'鸿璐 十协会南部4科',10609:'鸿璐 20区圣愚',10611:'鸿璐 句点事务所代表',
+ 10612:'鸿璐 R公司第四集团军驯鹿队',10613:'鸿璐 鸿园的君主',
+ 10614:'鸿璐 蜘蛛巢环指父辈',10615:'鸿璐 S公司推奴人',
+ 10703:'希斯克里夫 R公司第四集团军兔子队',10705:'希斯克里夫 脑叶公司E.G.O:狐雨',
+ 10707:'希斯克里夫 裴廓德号鱼叉手',10708:'希斯克里夫 十一协会南部3科',
+ 10710:'希斯克里夫 狂猎',10711:'希斯克里夫 句点事务所收尾人',
+ 10712:'希斯克里夫 黑云会若众',10713:'希斯克里夫 W公司4级清扫人员-CCA',
+ 10714:'希斯克里夫 黑兽-酉魁首',10715:'希斯克里夫 中指幼兄',
+ 10716:'希斯克里夫 蜘蛛巢拇指子辈',10802:'以实玛利 R公司第四集团军驯鹿队',
+ 10806:'以实玛利 六协会南部4科',10807:'以实玛利 臼齿修船厂收尾人',
+ 10808:'以实玛利 裴廓德号船长',10810:'以实玛利 二协会西部3科',
+ 10811:'以实玛利 黑云会副会长',10812:'以实玛利 家主候选人',
+ 10813:'以实玛利 定事务所代表',10814:'以实玛利 蜘蛛巢中指子辈',
+ 10815:'以实玛利 LCD现场推理小队',10902:'罗佳 黑云会若众',
+ 10905:'罗佳 玫瑰扳手工坊代表',10907:'罗佳 十协会南部4科',
+ 10908:'罗佳 六协会南部4科科长',10910:'罗佳 九协会北部3科',
+ 10911:'罗佳 拉·曼却领公主',10912:'罗佳 黑兽-巳',10913:'罗佳 脑叶公司E.G.O:泪锋之剑',
+ 10914:'罗佳 R公司第四集团军驯鹿队',10915:'罗佳 环指野兽派讲解员',
+ 10916:'罗佳 蜘蛛巢拇指父辈',11002:'辛克莱 剑契组杀手',11005:'辛克莱 准执柄者',
+ 11008:'辛克莱 五协会南部4科科长',11009:'辛克莱 黎明事务所收尾人',
+ 11011:'辛克莱 九协会北部3科',11012:'辛克莱 中指幼弟',11013:'辛克莱 拇指东部士兵II',
+ 11014:'辛克莱 黑兽-酉',11015:'辛克莱 蜘蛛巢小指子辈',
+ 11104:'奥提斯 七协会南部6科科长',11105:'奥提斯 臼齿事务所收尾人',
+ 11107:'奥提斯 脑叶公司E.G.O:魔弹',11108:'奥提斯 呼啸山庄首席管家',
+ 11110:'奥提斯 W公司3级清扫组长',11111:'奥提斯 拉·曼却领理发师',
+ 11112:'奥提斯 黑兽-卯',11113:'奥提斯 T公司3级强制征收人员',
+ 11114:'奥提斯 LCA瓦吉特先锋三队队长',11115:'奥提斯 蜘蛛巢中指父辈',
+ 11203:'格里高尔 G公司科长代理',11206:'格里高尔 二协会南部4科',
+ 11207:'格里高尔 双钩海盗团大副',11209:'格里高尔 埃德加家族继承人',
+ 11210:'格里高尔 拉·曼却领神父',11211:'格里高尔 炎拳事务所幸存者',
+ 11212:'格里高尔 黑兽-巳',11213:'格里高尔 夜锥组区',11214:'格里高尔 脑叶公司E.G.O:目灯',
+ 11215:'格里高尔 LCE_E.G.O:AEDD'
+};
+
+// Factions from 死斗模式 (阵营赛人格归属.txt)
+const FACTIONS_HIGH = [ // 上等 - 强力
+ {name:'脑叶公司E.G.O', ids:[10110,10207,10312,10410,10414,10514,10705,10913,11107,11214]},
+ {name:'鸿园', ids:[10114,10212,10313,10411,10714,10912,11014,11112,11212,10413,10613,10812]},
+];
+const FACTIONS_MID = [ // 中等
+ {name:'协会联盟', ids:[10112,10806,10908,10206,11104,10910,11011,10510,10608,10907,10213]},
+ {name:'事务所联盟', ids:[10611,10711,10707,10808,10807,11105]},
+ {name:'R公司', ids:[10506,10612,10703,10802,10914]},
+ {name:'血魔不是区', ids:[10403,10712,10811,10902,10310,10513,10911,11111,11210]},
+ {name:'护卫联盟', ids:[10810,11206,10305,10311,10511,11008]},
+];
+const FACTIONS_LOW = [ // 下等 - 弱势
+ {name:'剑契组', ids:[10103,10208,10508,11002,10815]},
+ {name:'山庄', ids:[10408,11209,11108,10710]},
+ {name:'N公司', ids:[10113,10412,10504,10204,11005]},
+ {name:'被割舍者', ids:[10109,10716,10814,11012,11013,10214,10306,10515]},
+ {name:'W公司', ids:[10106,10302,10405,10503,10713,11110]},
+];
+const ALL_FACTIONS = FACTIONS_HIGH.concat(FACTIONS_MID).concat(FACTIONS_LOW);
+const FINGER_DATA = [
+ {name:'拇指', ids:[10512,10916]},{name:'食指', ids:[10115,10314]},
+ {name:'中指', ids:[10715,11115]},{name:'环指', ids:[10215,10614,10915]},
+ {name:'小指', ids:[10415,11015]},
+];
+const FINGER_NAMES = ['拇指','食指','中指','环指','小指'];
+const SANREN = [10104,10210,10211,10309,10404,10603,10605,10609,10615,10708,10813,10905,11009,11113,11114,11203,11207,11211,11213,11215];
+const allCharIds = Object.keys(P).map(Number);
+const ROULE_NAMES = ['🔴全上等','🔵全下等','🟣镜像对决','🎲大乐透','🎰命运之手'];
+const ROULE_KEYS = ['high','low','mirror','lottery','fate'];
+
+function fullName(id){return P[id]||'?'+id;}
+function shortName(id){var n=P[id];return n?n.split(' ')[1]:'?'+id;}
+function rand(n){return Math.floor(Math.random()*n);}
+function pick(arr){return arr[rand(arr.length)];}
+function shuffle(a){var arr=a.slice(),i=arr.length,j,t;while(i){j=rand(i--);t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
+
+var tt;
+function toast(m){
+ var el=document.getElementById('toast');
+ el.textContent=m; el.className='toast show';
+ clearTimeout(tt);tt=setTimeout(function(){el.className='toast';},2500);
+}
+
+// ═══════════ STATE ═══════════
+let G = {
+ curGame:0, phase:'start', // start|wheel|draw|dice|pick|done|shop|finalPick|finalDone
+ A:{faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null},
+ B:{faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null},
+ roules:[], // results for games 0-3
+ shopA:{}, shopB:{}, // purchased items
+ rngStack:[], // reusable RNG
+};
+
+function initMatch(){
+ G.curGame=0; G.phase='wheel';
+ G.A={faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null};
+ G.B={faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null};
+ G.roules=[];
+ G.shopA={};G.shopB={};
+ document.getElementById('scoreSection').style.display='block';
+ document.getElementById('gameSection').classList.add('active');
+ renderScore();
+ renderGame();
+}
+
+// ═══════════ WHEEL ═══════════
+function renderWheel(){
+ document.getElementById('wheelArea').style.display='block';
+ document.getElementById('drawArea').style.display='none';
+ document.getElementById('diceArea').style.display='none';
+ document.getElementById('pickArea').style.display='none';
+ document.getElementById('resultArea').style.display='none';
+ document.getElementById('shopArea').style.display='none';
+
+ var isG5 = G.curGame === 4;
+ if(isG5){
+ document.getElementById('wheelArea').innerHTML=
+ '<div style="text-align:center;padding:20px;"><div style="font-size:48px;">🎰</div>'+
+ '<div style="font-size:20px;font-weight:700;color:#f59e0b;">第5局 · 赌场终局</div>'+
+ '<div style="margin-top:12px;color:#94a3b8;">点击进入商店购买商品</div>'+
+ '<button class="btn btn-gold" style="margin-top:16px;" onclick="enterShop()">🛒 进入商店</button></div>';
+ return;
+ }
+
+ var html='<div class="section-title">🎰 第'+(G.curGame+1)+'局 · 摇轮盘</div>';
+ html+='<div class="wheel-area">';
+ html+='<div class="wheel-spin" id="wheelSpin"><div class="inner">🎰</div></div>';
+ html+='<div id="wheelResult"></div>';
+ html+='<button class="btn btn-warning" id="wheelBtn" onclick="spinWheel()">🎰 摇轮盘</button>';
+ html+='</div>';
+ document.getElementById('wheelArea').innerHTML=html;
+ document.getElementById('statusArea').innerHTML='🎰 点击「摇轮盘」决定本局规则';
+}
+
+function spinWheel(){
+ var idx = rand(5);
+ var rk = ROULE_KEYS[idx];
+ var rn = ROULE_NAMES[idx];
+ G.roules.push(rk);
+ document.getElementById('wheelResult').innerHTML=
+ '<div class="wheel-result r'+(idx+1)+'"><div style="font-size:14px;margin-bottom:4px;">本局规则</div>'+rn+'</div>';
+ document.getElementById('wheelBtn').style.display='none';
+ document.getElementById('statusArea').innerHTML='规则已确定 → 抽阵营';
+ setTimeout(function(){G.phase='draw';renderGame();},800);
+}
+
+// ═══════════ DRAW ═══════════
+function renderDraw(){
+ document.getElementById('wheelArea').style.display='none';
+ document.getElementById('drawArea').style.display='block';
+ document.getElementById('diceArea').style.display='none';
+ document.getElementById('pickArea').style.display='none';
+ document.getElementById('resultArea').style.display='none';
+ document.getElementById('shopArea').style.display='none';
+
+ var rk = G.roules[G.curGame];
+ var isG5 = G.curGame === 4;
+ 
+ var html='<div class="section-title">🎲 '+(isG5?'第5局':'第'+(G.curGame+1)+'局')+' · 抽阵营</div>';
+ html+='<div style="text-align:center;font-size:16px;font-weight:600;margin-bottom:12px;color:#22c55e;">';
+ html+=ROULE_NAMES[ROULE_KEYS.indexOf(rk)]+'</div>';
+
+ if(rk==='lottery'){
+ // 大乐透: draw 12 random chars
+ var pool = shuffle(allCharIds).slice(0,12);
+ // Store for later
+ var html2='<div style="color:#94a3b8;margin-bottom:8px;">从118个人格中随机抽出12个候选：</div><div class="char-list">';
+ for(var id of pool){
+ html2+='<div class="char-item" style="cursor:default;"><span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
+ }
+ html2+='</div><div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmLotteryDraw()">✅ 确认候选池</button></div>';
+ html+=html2;
+ window._lotteryPool = pool;
+ } else if(rk==='fate'){
+ // Fate: both auto-draw and auto-pick
+ var fA = pick(ALL_FACTIONS);
+ var fB = pick(ALL_FACTIONS);
+ G.A.faction = fA; G.B.faction = fB;
+ G.A.picked = shuffle(fA.ids).slice(0,5);
+ G.B.picked = shuffle(fB.ids).slice(0,5);
+ html+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div><div class="dc-tier">'+fA.ids.length+'人</div></div>';
+ html+='<div style="font-size:22px;color:#475569;">⚡</div>';
+ html+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div><div class="dc-tier">'+fB.ids.length+'人</div></div></div>';
+ html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmFateDraw()">✅ 系统自动选人完成，进入对战</button></div>';
+ } else {
+ var tierA=getTierForRoule(rk);
+ var tierB=getTierForRoule(rk);
+ if(rk==='mirror'){
+ var mirrorPool = ALL_FACTIONS.filter(function(f){return f.ids.length>=6;});
+ var fM = pick(mirrorPool);
+ G.A.faction=JSON.parse(JSON.stringify(fM));
+ G.B.faction=JSON.parse(JSON.stringify(fM));
+ html+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">双方使用同一阵营</div><div class="dc-faction">'+fM.name+'</div><div class="dc-tier">'+fM.ids.length+'人</div></div>';
+ html+='<div style="font-size:22px;color:#475569;">🔄</div>';
+ html+='<div class="draw-card"><div style="color:#a855f7;">双方使用同一阵营</div><div class="dc-faction">'+fM.name+'</div><div class="dc-tier">'+fM.ids.length+'人</div></div></div>';
+ html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmMirrorDraw()">✅ 确定，进入骰子阶段</button></div>';
+ } else {
+ var fA = pick(tierA);
+ var fB = pick(tierB);
+ G.A.faction=fA; G.B.faction=fB;
+ html+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div><div class="dc-tier">'+fA.ids.length+'人</div></div>';
+ html+='<div style="font-size:22px;color:#475569;">VS</div>';
+ html+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div><div class="dc-tier">'+fB.ids.length+'人</div></div></div>';
+ html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmNormalDraw()">✅ 确定，进入骰子阶段</button></div>';
+ }
+ }
+ document.getElementById('drawArea').innerHTML=html;
+}
+
+function confirmLotteryDraw(){ G.phase='pick'; G.A.picked=[]; G.B.picked=[]; renderGame(); }
+function confirmFateDraw(){ G.phase='done'; renderGame(); }
+function confirmMirrorDraw(){ G.phase='dice'; renderGame(); }
+function confirmNormalDraw(){ G.phase='dice'; renderGame(); }
+
+function getTierForRoule(rk){
+ if(rk==='high') return FACTIONS_HIGH;
+ if(rk==='low') return FACTIONS_LOW;
+ return ALL_FACTIONS;
+}
+
+// ═══════════ DICE ═══════════
+function renderDice(){
+ document.getElementById('drawArea').style.display='none';
+ document.getElementById('diceArea').style.display='flex';
+ document.getElementById('diceArea').innerHTML=
+ '<div><div style="font-size:11px;color:#818cf8;">蓝方</div><div class="dice-box" id="diceA">-</div></div>'+
+ '<button class="btn btn-warning" onclick="rollDice()" id="diceBtn">🎲 掷骰子</button>'+
+ '<div><div style="font-size:11px;color:#f472b6;">红方</div><div class="dice-box" id="diceB">-</div></div>';
+ document.getElementById('statusArea').innerHTML='🎲 点击「掷骰子」决定谁先选人';
+}
+
+function rollDice(){
+ var dA,dB;
+ do{dA=rand(6)+1;dB=rand(6)+1;}while(dA===dB);
+ document.getElementById('diceA').textContent=dA;
+ document.getElementById('diceB').textContent=dB;
+ document.getElementById('diceA').className='dice-box'+(dA>dB?' winner':'');
+ document.getElementById('diceB').className='dice-box'+(dB>dA?' winner':'');
+ document.getElementById('diceBtn').style.display='none';
+
+ var rk = G.roules[G.curGame];
+ var isLottery = rk === 'lottery';
+ // 大乐透: 赢家先选; 其他: 赢家后选
+ var firstPicker = isLottery ? (dA>dB?'A':'B') : (dA<dB?'A':'B');
+ window._firstPicker = firstPicker;
+ var fn = firstPicker==='A'?'蓝方先选':'红方先选';
+ document.getElementById('statusArea').innerHTML= '➖ '+fn+'<br><button class="btn btn-success" onclick="startPicking()" style="margin-top:8px;">✅ 开始选人</button>';
+}
+
+function startPicking(){
+ G.phase='pick';
+ G.A.picked=[]; G.B.picked=[];
+ renderGame();
+}
+
+// ═══════════ PICK ═══════════
+function renderPick(){
+ document.getElementById('drawArea').style.display='none';
+ document.getElementById('diceArea').style.display='none';
+ document.getElementById('pickArea').style.display='block';
+ document.getElementById('resultArea').style.display='none';
+
+ var rk = G.roules[G.curGame];
+ var isLottery = rk === 'lottery';
+ var isFate = rk === 'fate';
+
+ if(isFate){ return; } // already done
+
+ var pA=G.A,pB=G.B;
+
+ if(isLottery){
+ renderLotteryPick();
+ return;
+ }
+
+ var html='<div class="section-title">✋ 选人 · '+ROULE_NAMES[ROULE_KEYS.indexOf(rk)]+'</div>';
+ html+='<div class="battle-setup">';
+ html+=renderPickPanel('A',pA.faction);
+ html+=renderPickPanel('B',pB.faction);
+ html+='</div>';
+ document.getElementById('pickArea').innerHTML=html;
+ updatePickState();
+}
+
+function renderPickPanel(side,faction){
+ var p=G[side];
+ var need=5;
+ var html='<div class="player-panel"><div class="pp-header">';
+ html+='<span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ html+='<span class="pp-faction">'+faction.name+'</span></div>';
+ // Picks
+ html+='<div style="font-size:12px;color:#64748b;">已选('+p.picked.length+'/5)</div><div class="pick-area">';
+ for(var i=0;i<5;i++){
+ if(i<p.picked.length){
+ var id=p.picked[i];
+ html+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fullName(id)+'</span></div>';
+ }else{
+ html+='<div class="pick-slot">'+(i+1)+'</div>';
+ }
+ }
+ html+='</div>';
+ // Available
+ html+='<div style="font-size:12px;color:#64748b;margin-top:8px;">可选人物：</div><div class="char-list">';
+ for(var id of faction.ids){
+ if(p.picked.indexOf(id)>=0) continue;
+ html+='<div class="char-item" onclick="addPick(\''+side+'\','+id+')">';
+ html+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
+ }
+ html+='</div></div>';
+ return html;
+}
+
+function renderLotteryPick(){
+ var pool = window._lotteryPool || [];
+ var html='<div class="section-title">🎲 大乐透 · 轮流选人</div>';
+ html+='<div class="battle-setup">';
+ for(var side of ['A','B']){
+ var p=G[side];
+ html+='<div class="player-panel"><div class="pp-header">';
+ html+='<span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ html+='<span style="font-size:12px;color:#64748b;">已选'+p.picked.length+'/5</span></div>';
+ html+='<div class="pick-area">';
+ for(var i=0;i<5;i++){
+ if(i<p.picked.length){
+ var id=p.picked[i];
+ html+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fullName(id)+'</span></div>';
+ }else{
+ html+='<div class="pick-slot">'+(i+1)+'</div>';
+ }
+ }
+ html+='</div></div>';
+ }
+ html+='</div>';
+ // Available pool
+ html+='<div style="font-size:12px;color:#64748b;margin-top:8px;">候选池（剩余'+pool.length+'人）：</div><div class="char-list">';
+ for(var id of pool){
+ var taken = G.A.picked.indexOf(id)>=0 || G.B.picked.indexOf(id)>=0;
+ if(taken) continue;
+ html+='<div class="char-item" onclick="lotteryPick('+id+')">';
+ html+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
+ }
+ html+='</div>';
+ html+='<div style="margin-top:10px;text-align:center;" id="lotteryStatus">';
+ var total = G.A.picked.length + G.B.picked.length;
+ var firstP = window._firstPicker;
+ var turn = total < 10 ? ((total % 2 === 0) ? firstP : (firstP==='A'?'B':'A')) : null;
+ if(turn){
+ html+='✋ '+(turn==='A'?'蓝方':'红方')+'选人中（'+(G[turn].picked.length)+'/5）';
+ }else{
+ html+='<button class="btn btn-success" onclick="confirmLotteryDone()">✅ 选人完成，开始对战</button>';
+ }
+ html+='</div>';
+ document.getElementById('pickArea').innerHTML=html;
+}
+
+function addPick(side,id){
+ var p=G[side];
+ if(p.picked.length>=5) return;
+ p.picked.push(id);
+ renderGame();
+}
+
+function lotteryPick(id){
+ var total = G.A.picked.length + G.B.picked.length;
+ var firstP = window._firstPicker;
+ var turn = total < 10 ? ((total % 2 === 0) ? firstP : (firstP==='A'?'B':'A')) : null;
+ if(!turn) return;
+ G[turn].picked.push(id);
+ // Remove from pool
+ var pool=window._lotteryPool;
+ var idx=pool.indexOf(id);
+ if(idx>=0) pool.splice(idx,1);
+ renderGame();
+}
+
+function confirmLotteryDone(){
+ G.phase='done';
+ renderGame();
+}
+
+function updatePickState(){
+ var rk=G.roules[G.curGame];
+ if(rk==='lottery'||rk==='fate') return;
+ var total = G.A.picked.length + G.B.picked.length;
+ var need = 10;
+ var isLottery = false;
+ var firstP = window._firstPicker;
+ var turn = total < need ? ((total % 2 === 0) ? (isLottery?firstP:firstP) : (isLottery?(firstP==='A'?'B':'A'):(firstP==='A'?'B':'A'))) : null;
+ // Simpler: first picker picks 5, then second picks 5
+ if(total<5){
+ turn=firstP;
+ } else if(total<10){
+ turn=firstP==='A'?'B':'A';
+ } else { turn=null; }
+ var status='';
+ if(turn){
+ status='✋ '+(turn==='A'?'蓝方':'红方')+'选人中（'+(G[turn].picked.length)+'/5）';
+ } else {
+ if(G.A.picked.length>=5&&G.B.picked.length>=5){
+ status='<button class="btn btn-success" onclick="confirmPicksDone()">✅ 选人完成，开始对战</button>';
+ }
+ }
+ document.getElementById('statusArea').innerHTML=status;
+}
+
+function confirmPicksDone(){
+ G.phase='done'; renderGame();
+}
+
+// ═══════════ RESULT / GOLD ═══════════
+function renderDone(){
+ document.getElementById('pickArea').style.display='none';
+ document.getElementById('resultArea').style.display='block';
+ var pA=G.A,pB=G.B;
+ var html='<div class="section-title">'+(G.curGame===4?'🏆 第5局结果':'⚔️ 第'+(G.curGame+1)+'局结果')+'</div>';
+ html+='<div class="battle-setup">';
+ for(var side of ['A','B']){
+ var p=G[side];
+ var fn=p.faction?p.faction.name:'-';
+ html+='<div class="player-panel"><div class="pp-header"><span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ html+='<span class="pp-faction">'+fn+'</span></div>';
+ html+='<div class="final-grid">';
+ for(var id of p.picked){
+ html+='<div class="final-card"><span class="fc-id">'+id+'</span>'+fullName(id)+'</div>';
+ }
+ html+='</div></div>';
+ }
+ html+='</div>';
+ html+='<div style="text-align:center;margin-top:12px;">';
+ if(G.curGame===4){
+ html+='<div style="font-size:20px;font-weight:700;color:#f59e0b;margin-bottom:12px;">🏆 最终决战</div>';
+ html+='<button class="btn btn-success" onclick="recordG5Win(\'A\')">🏆 蓝方胜</button> ';
+ html+='<button class="btn btn-danger" onclick="recordG5Win(\'B\')">🏆 红方胜</button>';
+ } else {
+ html+='<button class="btn btn-success" onclick="recordWin(\'A\')">🏆 蓝方胜</button> ';
+ html+='<button class="btn btn-danger" onclick="recordWin(\'B\')">🏆 红方胜</button>';
+ }
+ html+='</div>';
+ document.getElementById('resultArea').innerHTML=html;
+ document.getElementById('statusArea').innerHTML='';
+}
+
+function recordWin(side){
+ var rk=G.roules[G.curGame];
+ var bonus = (rk==='lottery'||rk==='fate')?1:0;
+ G[side].gold += 3 + bonus;
+ var loser=side==='A'?'B':'A';
+ G[loser].gold += 2;
+ toast((side==='A'?'蓝方':'红方')+' 获胜！+'+(3+bonus)+'金'+(bonus?'(含奖励)':''));
+ G.curGame++;
+ if(G.curGame >= 4){
+ // Enter shop phase
+ G.phase='shop';
+ renderScore();
+ renderGame();
+ } else {
+ G.phase='wheel';
+ renderScore();
+ renderGame();
+ updateTabs();
+ }
+}
+
+function recordG5Win(side){
+ toast('🏆 '+(side==='A'?'蓝方':'红方')+' 赢得轮盘赌！');
+ document.getElementById('statusArea').innerHTML=
+ '🏆 系列赛结束！'+(side==='A'?'蓝方':'红方')+' 获胜！<br><br><button class="btn btn-gold" onclick="initMatch()">🔄 新系列赛</button>';
+}
+
+// ═══════════ SHOP ═══════════
+function enterShop(){
+ G.phase='shop';
+ renderGame();
+}
+
+function renderShop(){
+ document.getElementById('wheelArea').style.display='none';
+ document.getElementById('drawArea').style.display='none';
+ document.getElementById('diceArea').style.display='none';
+ document.getElementById('pickArea').style.display='none';
+ document.getElementById('resultArea').style.display='none';
+ document.getElementById('shopArea').style.display='block';
+
+ var html='<div class="section-title">🛒 赌场商店 · 第5局准备</div>';
+ html+='<div style="text-align:center;margin-bottom:12px;">';
+ html+='<span class="gold-display" id="shopGoldA">🔵 蓝方 '+G.A.gold+'金</span>';
+ html+='<span style="margin:0 16px;color:#64748b;">🆚</span>';
+ html+='<span class="gold-display" id="shopGoldB">🔴 红方 '+G.B.gold+'金</span>';
+ html+='</div>';
+ html+='<div class="shop-grid"><div class="shop-column">';
+ html+=renderShopColumn('A');
+ html+='</div><div class="shop-column">';
+ html+=renderShopColumn('B');
+ html+='</div></div>';
+ html+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="confirmShop()">✅ 双方购买完毕，进入第5局</button></div>';
+ document.getElementById('shopArea').innerHTML=html;
+}
+
+function renderShopColumn(side){
+ var p=G[side];
+ var shop=side==='A'?G.shopA:G.shopB;
+ var items=[
+ {key:'reroll',icon:'🪙',name:'重抽币',price:2},
+ {key:'first',icon:'🎲',name:'先手',price:2},
+ {key:'finger',icon:'☝️',name:'命运手指',price:6},
+ {key:'slotup',icon:'⚡',name:'行动槽增幅',price:6},
+ ];
+ var html='<div class="shop-header">'+(side==='A'?'🔵 蓝方':'🔴 红方')+' 购物车</div>';
+ for(var item of items){
+ var bought = shop[item.key];
+ var cls=bought?'shop-item bought':'shop-item';
+ html+='<div class="'+cls+'" onclick="toggleShopItem(\''+side+'\',\''+item.key+'\','+item.price+')">';
+ html+='<span class="si-icon">'+item.icon+'</span>';
+ html+='<span class="si-name">'+item.name+'</span>';
+ html+='<span class="si-price">'+item.price+'金</span>';
+ if(bought) html+='<span style="font-size:12px;color:#22c55e;">✓</span>';
+ html+='</div>';
+ }
+ // Roulette effects
+ html+='<div style="margin-top:12px;font-size:13px;font-weight:600;color:#94a3b8;">🎰 轮盘效果</div>';
+ var roules = [
+ {key:'roule_high',icon:'🔴',name:'全上等',price:4},
+ {key:'roule_low',icon:'🔵',name:'全下等',price:4},
+ {key:'roule_mirror',icon:'🟣',name:'镜像对决',price:4},
+ {key:'roule_lottery',icon:'🎲',name:'大乐透',price:4},
+ {key:'roule_fate',icon:'🎰',name:'命运之手',price:4},
+ ];
+ for(var item of roules){
+ var bought = shop[item.key];
+ var cls=bought?'shop-item bought':'shop-item';
+ html+='<div class="'+cls+'" onclick="toggleShopItem(\''+side+'\',\''+item.key+'\','+item.price+')">';
+ html+='<span class="si-icon">'+item.icon+'</span>';
+ html+='<span class="si-name">'+item.name+'</span>';
+ html+='<span class="si-price">'+item.price+'金</span>';
+ if(bought) html+='<span style="font-size:12px;color:#22c55e;">✓</span>';
+ html+='</div>';
+ }
+ return html;
+}
+
+function toggleShopItem(side,key,price){
+ var p=G[side];
+ var shop=side==='A'?G.shopA:G.shopB;
+ if(shop[key]){
+ // Remove
+ delete shop[key];
+ p.gold += price;
+ } else {
+ if(p.gold < price){ toast('金币不足！'); return; }
+ shop[key] = true;
+ p.gold -= price;
+ }
+ renderGame();
+}
+
+function confirmShop(){
+ // Determine G5 roulette effect
+ var rA = Object.keys(G.shopA).filter(function(k){return k.startsWith('roule_');});
+ var rB = Object.keys(G.shopB).filter(function(k){return k.startsWith('roule_');});
+ var chosen;
+ if(rA.length===0 && rB.length===0){
+ chosen = null; // normal match
+ } else if(rA.length>0 && rB.length===0){
+ chosen = rA[0];
+ } else if(rA.length===0 && rB.length>0){
+ chosen = rB[0];
+ } else {
+ // Both bought - random between them
+ var pool = rA.concat(rB);
+ chosen = pool[rand(pool.length)];
+ }
+ window._g5Roule = chosen;
+
+ // Apply effects
+ // Reroll
+ var hasRerollA = G.shopA.reroll;
+ var hasRerollB = G.shopB.reroll;
+ // First pick
+ var hasFirstA = G.shopA.first;
+ var hasFirstB = G.shopB.first;
+ // Finger
+ if(G.shopA.finger){
+ var fd = pick(FINGER_DATA);
+ G.A.fingerFaction = fd;
+ G.A.fingerId = pick(fd.ids);
+ }
+ if(G.shopB.finger){
+ var fd2 = pick(FINGER_DATA);
+ G.B.fingerFaction = fd2;
+ G.B.fingerId = pick(fd2.ids);
+ }
+ // Action slot up - random unit
+ if(G.shopA.slotup){
+ // Just a flag for display
+ G.A.slotUp = true;
+ }
+ if(G.shopB.slotup){
+ G.B.slotUp = true;
+ }
+
+ // Show summary
+ var summary = '<div style="text-align:center;margin-bottom:12px;">';
+ summary += '<div style="font-size:16px;font-weight:700;color:#f59e0b;">🛒 购买结果</div>';
+ summary += '<div style="display:flex;justify-content:center;gap:24px;margin-top:8px;">';
+ var itemsA = Object.keys(G.shopA).filter(function(k){return !k.startsWith('roule_');});
+ var itemsB = Object.keys(G.shopB).filter(function(k){return !k.startsWith('roule_');});
+ summary += '<div style="text-align:left;"><span style="color:#818cf8;">🔵 蓝方:</span> '+(itemsA.length?itemsA.join(', '):'无')+'</div>';
+ summary += '<div style="text-align:left;"><span style="color:#f472b6;">🔴 红方:</span> '+(itemsB.length?itemsB.join(', '):'无')+'</div>';
+ summary += '</div>';
+ if(chosen){
+ var rn = ROULE_NAMES[ROULE_KEYS.indexOf(chosen.replace('roule_',''))];
+ summary += '<div style="margin-top:8px;color:#22c55e;">第5局规则：'+rn+'</div>';
+ } else {
+ summary += '<div style="margin-top:8px;color:#94a3b8;">第5局：普通对战（自选阵营）</div>';
+ }
+ summary += '</div>';
+ summary += '<div style="text-align:center;margin-top:8px;"><button class="btn btn-primary" onclick="startG5()">⚔️ 进入第5局</button></div>';
+ document.getElementById('shopArea').innerHTML=summary;
+}
+
+function startG5(){
+ G.curGame = 4;
+ G.phase = 'draw';
+ window._g5Applied = true;
+ G.A.picked = [];
+ G.B.picked = [];
+ if(G.A.fingerId){
+ // Add finger pick
+ G.A.picked.push(G.A.fingerId);
+ }
+ if(G.B.fingerId){
+ G.B.picked.push(G.B.fingerId);
+ }
+ renderScore();
+ updateTabs();
+ renderGame();
+}
+
+// ═══════════ RENDER ═══════════
+function renderGame(){
+ if(G.phase==='wheel') renderWheel();
+ else if(G.phase==='draw') renderDraw();
+ else if(G.phase==='dice') renderDice();
+ else if(G.phase==='pick') renderPick();
+ else if(G.phase==='done') renderDone();
+ else if(G.phase==='shop') renderShop();
+ else if(G.phase==='start') initMatch();
+ updateSteps();
+}
+
+function renderScore(){
+ var sA=G.A.gold, sB=G.B.gold;
+ document.getElementById('scoreBar').innerHTML=
+ '<div class="score-box"><div class="sb-label" style="color:#818cf8;">🔵 蓝方</div><div class="sb-val" style="color:#818cf8;">'+sA+'</div><div class="sb-gold">💰 '+sA+'金</div></div>'+
+ '<div class="score-box"><div class="sb-label">第</div><div class="sb-val" id="gameNum">'+(G.curGame+1)+'</div><div class="sb-label">/ 5 场</div></div>'+
+ '<div class="score-box"><div class="sb-label" style="color:#f472b6;">🔴 红方</div><div class="sb-val" style="color:#f472b6;">'+sB+'</div><div class="sb-gold">💰 '+sB+'金</div></div>';
+ document.getElementById('gameNum').textContent = G.curGame+1;
+}
+
+function updateTabs(){
+ var tabs=document.querySelectorAll('.game-tab');
+ tabs.forEach(function(t,i){
+ t.classList.remove('active','played');
+ if(i===G.curGame) t.classList.add('active');
+ else if(i<G.curGame) t.classList.add('played');
+ });
+}
+
+function updateSteps(){
+ var steps=['轮盘','抽阵营','骰子','选人','开战'];
+ var curIdx=0;
+ if(G.phase==='wheel') curIdx=0;
+ else if(G.phase==='draw') curIdx=1;
+ else if(G.phase==='dice') curIdx=2;
+ else if(G.phase==='pick') curIdx=3;
+ else if(G.phase==='done') curIdx=4;
+ else if(G.phase==='shop') curIdx=0;
+ var html='';
+ for(var i=0;i<steps.length;i++){
+ var cls='step';
+ if(i<curIdx) cls+=' done';
+ else if(i===curIdx) cls+=' current';
+ html+='<div class="step '+cls+'">'+(i<curIdx?'✓':'')+steps[i]+'</div>';
+ }
+ document.getElementById('stepBar').innerHTML=html;
+}
+
+// ═══════════ INIT ═══════════
+initMatch();
+</script>
 </body>
 </html>
