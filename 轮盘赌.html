@@ -48,49 +48,31 @@ body {
 }
 .btn:hover { filter: brightness(1.15); }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; filter: none; }
-.btn-primary { background: linear-gradient(135deg,#22c55e,#16a34a); color: #fff; }
+.btn-primary { background: linear-gradient(135deg,#818cf8,#6366f1); color: #fff; }
 .btn-success { background: linear-gradient(135deg,#22c55e,#16a34a); color: #fff; }
 .btn-danger { background: linear-gradient(135deg,#ef4444,#dc2626); color: #fff; }
 .btn-warning { background: linear-gradient(135deg,#eab308,#ca8a04); color: #000; }
 .btn-gold { background: linear-gradient(135deg,#f59e0b,#d97706); color: #000; }
-.btn-finger { background: linear-gradient(135deg,#a855f7,#7c3aed); color: #fff; }
 
 .game-phase { display: none; }
 .game-phase.active { display: block; }
 
 .game-tabs {
- display: flex;
- gap: 8px;
- margin-bottom: 12px;
- flex-wrap: wrap;
+ display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;
 }
 .game-tab {
- padding: 8px 16px;
- border-radius: 8px;
- font-size: 13px;
- font-weight: 600;
- cursor: pointer;
- border: 1px solid #1e293b;
- background: #0f172a;
- color: #64748b;
+ padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+ cursor: pointer; border: 1px solid #1e293b; background: #0f172a; color: #64748b;
 }
 .game-tab.active { background: #1a3a2a; border-color: #22c55e; color: #e2e8f0; }
 .game-tab.played { background: #141b2d; color: #22c55e; border-color: #22c55e; }
 
 .step-bar {
- display: flex;
- gap: 4px;
- margin-bottom: 14px;
- flex-wrap: wrap;
- justify-content: center;
+ display: flex; gap: 4px; margin-bottom: 14px; flex-wrap: wrap; justify-content: center;
 }
 .step {
- padding: 5px 12px;
- border-radius: 6px;
- font-size: 12px;
- background: #0f172a;
- color: #64748b;
- border: 1px solid #1e293b;
+ padding: 5px 12px; border-radius: 6px; font-size: 12px;
+ background: #0f172a; color: #64748b; border: 1px solid #1e293b;
 }
 .step.done { background: #1a3a2a; color: #22c55e; border-color: #22c55e; }
 .step.current { background: #1a3a2a; color: #f59e0b; border-color: #f59e0b; }
@@ -105,48 +87,29 @@ body {
 .score-box .sb-label { font-size: 12px; color: #64748b; }
 .score-box .sb-val { font-size: 24px; font-weight: 800; }
 .score-box .sb-gold { font-size: 12px; color: #f59e0b; margin-top: 2px; }
-.score-box .sb-divider { font-size: 20px; font-weight: 700; color: #475569; }
 
-/* Roulette Wheel */
-.wheel-area {
- display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0;
-}
-.wheel-spin {
- width: 120px; height: 120px; border-radius: 50%;
- background: conic-gradient(#22c55e 0deg 72deg, #eab308 72deg 144deg, #a855f7 144deg 216deg, #3b82f6 216deg 288deg, #ef4444 288deg 360deg);
- display: flex; align-items: center; justify-content: center;
- font-size: 16px; font-weight: 800;
- position: relative; transition: transform 1s ease-out;
-}
-.wheel-spin .inner {
- width: 80px; height: 80px; border-radius: 50%;
- background: #0f172a; display: flex; align-items: center; justify-content: center;
- font-size: 13px; text-align: center; line-height: 1.3;
- border: 2px solid #1e293b;
-}
+/* Wheel */
+.wheel-area { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px 0; }
 .wheel-result {
- font-size: 24px; font-weight: 700; padding: 8px 24px;
+ font-size: 24px; font-weight: 700; padding: 12px 28px;
  border-radius: 10px; text-align: center;
 }
-.wheel-result.r1 { background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; }
-.wheel-result.r2 { background: rgba(234,179,8,0.15); border: 1px solid #eab308; color: #eab308; }
-.wheel-result.r3 { background: rgba(168,85,247,0.15); border: 1px solid #a855f7; color: #a855f7; }
-.wheel-result.r4 { background: rgba(59,130,246,0.15); border: 1px solid #3b82f6; color: #3b82f6; }
-.wheel-result.r5 { background: rgba(239,68,68,0.15); border: 1px solid #ef4444; color: #ef4444; }
+.wheel-result.r0 { background: rgba(34,197,94,0.15); border: 1px solid #22c55e; color: #22c55e; }
+.wheel-result.r1 { background: rgba(234,179,8,0.15); border: 1px solid #eab308; color: #eab308; }
+.wheel-result.r2 { background: rgba(168,85,247,0.15); border: 1px solid #a855f7; color: #a855f7; }
+.wheel-result.r3 { background: rgba(59,130,246,0.15); border: 1px solid #3b82f6; color: #3b82f6; }
+.wheel-result.r4 { background: rgba(239,68,68,0.15); border: 1px solid #ef4444; color: #ef4444; }
 
 /* Draw */
-.draw-grid {
- display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; width: 100%; max-width: 800px;
-}
-@media (max-width:700px) { .draw-grid { grid-template-columns: 1fr; } }
+.draw-grid { display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; }
 .draw-card {
- background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; min-width: 200px; text-align: center;
+ background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 16px; min-width: 220px; text-align: center;
 }
 .draw-card .dc-faction { font-size: 18px; font-weight: 700; margin: 6px 0; }
 .draw-card .dc-tier { font-size: 13px; color: #64748b; }
 
-/* Character list */
-.char-list { display: flex; flex-direction: column; gap: 4px; max-height: 300px; overflow-y: auto; margin-top: 8px; }
+/* Char list */
+.char-list { display: flex; flex-direction: column; gap: 4px; max-height: 300px; overflow-y: auto; margin: 8px 0; }
 .char-item {
  display: flex; align-items: center; gap: 8px;
  padding: 6px 10px; border-radius: 6px;
@@ -154,46 +117,44 @@ body {
  cursor: pointer; transition: all 0.12s; font-size: 13px;
 }
 .char-item:hover { border-color: #334155; background: rgba(255,255,255,0.06); }
-.char-item.selected { border-color: #22c55e; background: rgba(34,197,94,0.08); opacity: 0.5; cursor: default; }
-.char-item .ci-id { font-size: 11px; color: #64748b; width: 50px; flex-shrink: 0; font-family: monospace; cursor: pointer; }
+.char-item .ci-id { font-size: 11px; color: #64748b; width: 50px; flex-shrink: 0; font-family: monospace; }
 .char-item .ci-name { flex: 1; }
-.char-item .ci-tag { font-size: 10px; padding: 1px 6px; border-radius: 4px; flex-shrink: 0; }
-.tag-finger-tag { background: #f472b6; color: #000; }
 
-/* Pick slots */
-.pick-area { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+/* Pick */
+.pick-area { display: flex; flex-direction: column; gap: 6px; }
 .pick-slot {
  width: 100%; min-height: 40px; border-radius: 8px;
  border: 2px dashed #334155;
  display: flex; align-items: center; padding: 6px 12px; font-size: 13px; color: #64748b; position: relative;
 }
 .pick-slot.filled {
- border-style: solid; border-color: #22c55e; background: rgba(34,197,94,0.1); color: #e2e8f0; cursor: pointer;
+ border-style: solid; border-color: #22c55e; background: rgba(34,197,94,0.1); color: #e2e8f0;
 }
-.pick-slot.filled .remove {
+.pick-slot .remove {
  position: absolute; top: -6px; right: -6px; width: 18px; height: 18px; border-radius: 50%;
- background: #ef4444; color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+ background: #ef4444; color: #fff; font-size: 10px; display: flex;
+ align-items: center; justify-content: center; cursor: pointer;
 }
-.pick-slot .pick-id { font-size: 11px; color: #64748b; margin-right: 8px; flex-shrink: 0; }
+.pick-slot .pick-id { font-size: 11px; color: #64748b; margin-right: 8px; flex-shrink: 0; font-family: monospace; }
 .pick-slot .pick-name { flex: 1; }
 
-/* Panels */
-.battle-setup {
- display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: start;
-}
-@media (max-width:900px) { .battle-setup { grid-template-columns: 1fr; } }
+.battle-panels { display: flex; gap: 14px; align-items: flex-start; }
+.battle-panels > .player-panel { flex: 1; min-width: 0; }
+@media (max-width:500px) { .battle-panels { flex-direction: column; } }
 .player-panel {
  background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 14px;
+ min-width:0; overflow:hidden;
 }
 .player-panel .pp-header {
- display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #1e293b;
+ display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+ padding-bottom: 8px; border-bottom: 1px solid #1e293b;
 }
-.player-panel .pp-name { font-size: 15px; font-weight: 700; }
+.player-panel .pp-name { font-size: 14px; font-weight: 700; }
 .player-panel .pp-faction { font-size: 13px; color: #22c55e; }
 
 /* Dice */
-.dice-area {
- display: flex; align-items: center; justify-content: center; gap: 20px; padding: 20px 0; flex-wrap: wrap;
+.dice-row {
+ display: flex; align-items: center; justify-content: center; gap: 24px; padding: 20px 0; flex-wrap: wrap;
 }
 .dice-box {
  width: 64px; height: 64px; border-radius: 12px;
@@ -208,30 +169,28 @@ body {
 .final-card {
  padding: 8px 14px; border-radius: 8px; background: rgba(34,197,94,0.08); border: 1px solid #22c55e; font-size: 13px;
 }
-.final-card .fc-id { font-size: 11px; color: #64748b; margin-right: 6px; cursor: pointer; }
+.final-card .fc-id { font-size: 11px; color: #64748b; margin-right: 6px; }
 .final-card.finger-card { border-color: #f472b6; background: rgba(244,114,182,0.1); }
 
 /* Shop */
-.shop-grid {
- display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
-}
+.shop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media (max-width:800px) { .shop-grid { grid-template-columns: 1fr; } }
-.shop-column { }
+.shop-section { margin-bottom: 12px; }
+.shop-section-title { font-size: 13px; font-weight: 600; color: #94a3b8; margin-bottom: 6px; padding-bottom: 4px; border-bottom: 1px solid #1e293b; }
 .shop-item {
  display: flex; align-items: center; gap: 10px;
- padding: 10px 14px; border-radius: 8px;
+ padding: 8px 12px; border-radius: 8px;
  background: #0f172a; border: 1px solid #1e293b;
- margin-bottom: 6px; cursor: pointer; transition: all 0.12s;
+ margin-bottom: 4px; cursor: pointer; transition: all 0.12s;
 }
 .shop-item:hover { border-color: #f59e0b; }
-.shop-item.bought { border-color: #22c55e; background: rgba(34,197,94,0.1); cursor: default; opacity: 0.7; }
-.shop-item .si-icon { font-size: 20px; }
-.shop-item .si-name { flex: 1; font-size: 13px; font-weight: 600; }
+.shop-item.bought { border-color: #22c55e; background: rgba(34,197,94,0.1); }
+.shop-item .si-icon { font-size: 18px; }
+.shop-item .si-name { flex: 1; font-size: 13px; }
 .shop-item .si-price { font-size: 12px; color: #f59e0b; font-weight: 700; }
-.shop-item .si-desc { font-size: 11px; color: #64748b; width: 100%; margin-top: 2px; }
-.shop-header { font-size: 14px; font-weight: 700; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid #1e293b; }
+.shop-item .si-check { font-size: 12px; color: #22c55e; }
+.shop-item .si-iname { font-size: 11px; color: #64748b; display: block; width: 100%; }
 
-/* Gold display */
 .gold-display {
  display: inline-flex; align-items: center; gap: 4px;
  padding: 3px 12px; border-radius: 12px;
@@ -256,7 +215,7 @@ body {
 <body>
 <div class="header">
  <h1>🎰 边狱巴士 · 轮盘赌</h1>
- <div class="sub">金币经济制 · 前4局攒钱 · 第5局花光 · 一局定胜负</div>
+ <div class="sub">前4局攒钱 · 第5局花光 · 一局定胜负</div>
 </div>
 <div class="container">
 <div class="section" id="scoreSection" style="display:none;">
@@ -265,19 +224,13 @@ body {
 <div id="gameSection" class="game-phase active">
  <div class="game-tabs" id="gameTabs"></div>
  <div class="step-bar" id="stepBar"></div>
- <div id="wheelArea" class="section" style="display:none;"></div>
- <div id="drawArea" class="section" style="display:none;"></div>
- <div id="diceArea" class="dice-area" style="display:none;"></div>
- <div id="pickArea" class="section" style="display:none;"></div>
- <div id="resultArea" class="section" style="display:none;"></div>
- <div id="shopArea" class="section" style="display:none;"></div>
+ <div id="mainArea"></div>
  <div class="status-area" id="statusArea"></div>
 </div>
 </div>
 <div class="toast" id="toast"></div>
-
 <script>
-// ═══════════ DATA ═══════════
+// ═══ DATA ═══
 const P = {
  10103:'李箱 剑契组杀手',10104:'李箱 技术解放联盟',10106:'李箱 W公司2级清扫职员',
  10109:'李箱 环指点彩派学徒',10110:'李箱 脑叶公司E.G.O::庄严哀悼',
@@ -334,657 +287,601 @@ const P = {
  11212:'格里高尔 黑兽-巳',11213:'格里高尔 夜锥组区',11214:'格里高尔 脑叶公司E.G.O:目灯',
  11215:'格里高尔 LCE_E.G.O:AEDD'
 };
-
-// Factions from 死斗模式 (阵营赛人格归属.txt)
-const FACTIONS_HIGH = [ // 上等 - 强力
+// 死斗模式阵营结构
+const F_HIGH = [
  {name:'脑叶公司E.G.O', ids:[10110,10207,10312,10410,10414,10514,10705,10913,11107,11214]},
  {name:'鸿园', ids:[10114,10212,10313,10411,10714,10912,11014,11112,11212,10413,10613,10812]},
+ {name:'事务所联盟', ids:[10611,10711,10707,10808,10807,11105,10813]},
 ];
-const FACTIONS_MID = [ // 中等
+const F_MID = [
  {name:'协会联盟', ids:[10112,10806,10908,10206,11104,10910,11011,10510,10608,10907,10213]},
- {name:'事务所联盟', ids:[10611,10711,10707,10808,10807,11105]},
- {name:'R公司', ids:[10506,10612,10703,10802,10914]},
  {name:'血魔不是区', ids:[10403,10712,10811,10902,10310,10513,10911,11111,11210]},
+ {name:'R公司', ids:[10506,10612,10703,10802,10914]},
  {name:'护卫联盟', ids:[10810,11206,10305,10311,10511,11008]},
-];
-const FACTIONS_LOW = [ // 下等 - 弱势
  {name:'剑契组', ids:[10103,10208,10508,11002,10815]},
  {name:'山庄', ids:[10408,11209,11108,10710]},
+];
+const F_LOW = [
  {name:'N公司', ids:[10113,10412,10504,10204,11005]},
  {name:'被割舍者', ids:[10109,10716,10814,11012,11013,10214,10306,10515]},
  {name:'W公司', ids:[10106,10302,10405,10503,10713,11110]},
 ];
-const ALL_FACTIONS = FACTIONS_HIGH.concat(FACTIONS_MID).concat(FACTIONS_LOW);
-const FINGER_DATA = [
+const ALL_F = F_HIGH.concat(F_MID).concat(F_LOW);
+const FINGERS = [
  {name:'拇指', ids:[10512,10916]},{name:'食指', ids:[10115,10314]},
  {name:'中指', ids:[10715,11115]},{name:'环指', ids:[10215,10614,10915]},
  {name:'小指', ids:[10415,11015]},
 ];
-const FINGER_NAMES = ['拇指','食指','中指','环指','小指'];
-const SANREN = [10104,10210,10211,10309,10404,10603,10605,10609,10615,10708,10813,10905,11009,11113,11114,11203,11207,11211,11213,11215];
-const allCharIds = Object.keys(P).map(Number);
-const ROULE_NAMES = ['🔴全上等','🔵全下等','🟣镜像对决','🎲大乐透','🎰命运之手'];
-const ROULE_KEYS = ['high','low','mirror','lottery','fate'];
+const ALL_IDS = Object.keys(P).map(Number);
+const SANREN = [10104,10210,10211,10309,10404,10603,10605,10609,10615,10708,10905,11009,11113,11114,11203,11207,11211,11213,11215];
+const R_NAMES = ['🔴全上等','🔵全下等','🟣镜像对决','🎲大乐透','🎰命运之手'];
+const R_KEYS = ['high','low','mirror','lottery','fate'];
 
-function fullName(id){return P[id]||'?'+id;}
-function shortName(id){var n=P[id];return n?n.split(' ')[1]:'?'+id;}
-function rand(n){return Math.floor(Math.random()*n);}
-function pick(arr){return arr[rand(arr.length)];}
-function shuffle(a){var arr=a.slice(),i=arr.length,j,t;while(i){j=rand(i--);t=arr[i];arr[i]=arr[j];arr[j]=t;}return arr;}
-
-var tt;
-function toast(m){
- var el=document.getElementById('toast');
- el.textContent=m; el.className='toast show';
- clearTimeout(tt);tt=setTimeout(function(){el.className='toast';},2500);
+function fn(id){return P[id]||'?'+id;}
+function sinner(id){var n=P[id];return n?n.split(' ')[0]:'?';}
+function r(n){return Math.floor(Math.random()*n);}
+function pk(arr){return arr[r(arr.length)];}
+function shf(a){var b=a.slice(),i=b.length,j,t;while(i){j=r(i--);t=b[i];b[i]=b[j];b[j]=t;}return b;}
+// Fill faction to at least 5 members from SANREN
+function fillFac(f){
+ var ids=f.ids.slice();
+ while(ids.length<5){
+ var pool=SANREN.filter(function(i){return ids.indexOf(i)<0;});
+ if(pool.length===0) break;
+ ids.push(pool[r(pool.length)]);
+ }
+ return {name:f.name,ids:ids};
 }
+// Pick up to 5 unique-sinner IDs from a pool, fill SANREN if needed
+function pickUnique(ids){
+ var picked=[],sinners={};
+ for(var id of shf(ids)){
+ var s=sinner(id);
+ if(!sinners[s]){sinners[s]=true;picked.push(id);}
+ if(picked.length>=5) break;
+ }
+ while(picked.length<5){
+ var san=SANREN.filter(function(i){return picked.indexOf(i)<0&&!sinners[sinner(i)];});
+ if(san.length===0) break;
+ var id=san[r(san.length)];
+ picked.push(id);
+ sinners[sinner(id)]=true;
+ }
+ return picked;
+}
+var _t;
+function t(m){var e=document.getElementById('toast');e.textContent=m;e.className='toast show';clearTimeout(_t);_t=setTimeout(function(){e.className='toast';},2500);}
+function copyId(id){var e=document.createElement('textarea');e.value=id;document.body.appendChild(e);e.select();document.execCommand('copy');document.body.removeChild(e);t('📋 已复制 ID: '+id);}
 
-// ═══════════ STATE ═══════════
-let G = {
- curGame:0, phase:'start', // start|wheel|draw|dice|pick|done|shop|finalPick|finalDone
- A:{faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null},
- B:{faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null},
- roules:[], // results for games 0-3
- shopA:{}, shopB:{}, // purchased items
- rngStack:[], // reusable RNG
+// ═══ STATE ═══
+var G={
+ cur:0,phase:'start',
+ A:{fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false},
+ B:{fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false},
+ ws:[], // roulette results 0-3
+ lt:[], // lottery pool
+ fp:null, // first picker
+ g5r:null, // G5 roulette
 };
 
-function initMatch(){
- G.curGame=0; G.phase='wheel';
- G.A={faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null};
- G.B={faction:null,picked:[],gold:0,fingerId:null,fingerFaction:null};
- G.roules=[];
- G.shopA={};G.shopB={};
+function res(){
+ G.cur=0;G.phase='start';G.A={fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false};
+ G.B={fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false};
+ G.ws=[];G.lt=[];G.fp=null;G.g5r=null;
+ // Generate game tabs
+ var th='';for(var i=0;i<5;i++)th+='<div class="game-tab" onclick="sw('+i+')">第'+(i+1)+'场</div>';
+ document.getElementById('gameTabs').innerHTML=th;
  document.getElementById('scoreSection').style.display='block';
  document.getElementById('gameSection').classList.add('active');
- renderScore();
- renderGame();
+ ren();tabUpd();
 }
 
-// ═══════════ WHEEL ═══════════
-function renderWheel(){
- document.getElementById('wheelArea').style.display='block';
- document.getElementById('drawArea').style.display='none';
- document.getElementById('diceArea').style.display='none';
- document.getElementById('pickArea').style.display='none';
- document.getElementById('resultArea').style.display='none';
- document.getElementById('shopArea').style.display='none';
+function ren(){ // main render
+ if(G.phase==='wheel'||G.phase==='start'){rWheel();}
+ else if(G.phase==='shop'){rShop();}
+ else if(G.phase==='draw'){rDraw();}
+ else if(G.phase==='dice'){rDice();}
+ else if(G.phase==='pick'){rPick();}
+ else if(G.phase==='done'){rDone();}
+ stepUpd();
+ scUpd();
+}
+function stepUpd(){
+ var m=['轮盘','抽阵','骰子','选人','开战'];
+ var x=0;
+ if(G.phase==='wheel')x=0;else if(G.phase==='draw')x=1;else if(G.phase==='dice')x=2;
+ else if(G.phase==='pick')x=3;else if(G.phase==='done')x=4;
+ var h='';
+ for(var i=0;i<5;i++){var c='step';if(i<x)c+=' done';else if(i===x)c+=' current';h+='<div class="step '+c+'">'+(i<x?'✓':'')+m[i]+'</div>';}
+ document.getElementById('stepBar').innerHTML=h;
+}
 
- var isG5 = G.curGame === 4;
- if(isG5){
- document.getElementById('wheelArea').innerHTML=
- '<div style="text-align:center;padding:20px;"><div style="font-size:48px;">🎰</div>'+
- '<div style="font-size:20px;font-weight:700;color:#f59e0b;">第5局 · 赌场终局</div>'+
- '<div style="margin-top:12px;color:#94a3b8;">点击进入商店购买商品</div>'+
- '<button class="btn btn-gold" style="margin-top:16px;" onclick="enterShop()">🛒 进入商店</button></div>';
+// ═══ WHEEL ═══
+function rWheel(){
+ var h;
+ if(G.cur===4){
+ h='<div class="section"><div class="section-title">🎰 第5局 · 赌场终局</div><div class="wheel-area">';
+ h+='<div style="font-size:48px;">🛒</div><div style="font-size:18px;font-weight:700;color:#f59e0b;margin:8px 0;">进入商店购买商品</div>';
+ h+='<div style="font-size:13px;color:#64748b;">前4局累计金币：🔵'+G.A.g+'金 · 🔴'+G.B.g+'金</div>';
+ h+='<button class="btn btn-gold" onclick="enterShop()" style="margin-top:12px;">🛒 进入商店</button></div></div>';
+ document.getElementById('mainArea').innerHTML=h;
+ document.getElementById('statusArea').innerHTML='';
  return;
  }
-
- var html='<div class="section-title">🎰 第'+(G.curGame+1)+'局 · 摇轮盘</div>';
- html+='<div class="wheel-area">';
- html+='<div class="wheel-spin" id="wheelSpin"><div class="inner">🎰</div></div>';
- html+='<div id="wheelResult"></div>';
- html+='<button class="btn btn-warning" id="wheelBtn" onclick="spinWheel()">🎰 摇轮盘</button>';
- html+='</div>';
- document.getElementById('wheelArea').innerHTML=html;
+ h='<div class="section"><div class="section-title">🎰 第'+(G.cur+1)+'局 · 摇轮盘</div><div class="wheel-area">';
+ h+='<div id="wheelRes" class="wheel-result" style="display:none;"></div>';
+ h+='<button class="btn btn-warning" onclick="spin()">🎰 摇轮盘</button></div></div>';
+ document.getElementById('mainArea').innerHTML=h;
  document.getElementById('statusArea').innerHTML='🎰 点击「摇轮盘」决定本局规则';
 }
 
-function spinWheel(){
- var idx = rand(5);
- var rk = ROULE_KEYS[idx];
- var rn = ROULE_NAMES[idx];
- G.roules.push(rk);
- document.getElementById('wheelResult').innerHTML=
- '<div class="wheel-result r'+(idx+1)+'"><div style="font-size:14px;margin-bottom:4px;">本局规则</div>'+rn+'</div>';
- document.getElementById('wheelBtn').style.display='none';
- document.getElementById('statusArea').innerHTML='规则已确定 → 抽阵营';
- setTimeout(function(){G.phase='draw';renderGame();},800);
+function spin(){
+ // Pick from unused roulette effects only
+ var used={};for(var rk of G.ws) used[rk]=true;
+ var avail=R_KEYS.filter(function(k){return !used[k];});
+ if(avail.length===0) avail=R_KEYS;
+ var i=R_KEYS.indexOf(avail[r(avail.length)]);
+ G.ws.push(R_KEYS[i]);
+ var el=document.getElementById('wheelRes');
+ el.style.display='block';
+ el.className='wheel-result r'+i;
+ el.innerHTML='<div style="font-size:14px;margin-bottom:4px;">本局规则</div>'+R_NAMES[i];
+ document.querySelector('#mainArea button').style.display='none';
+ document.getElementById('statusArea').innerHTML='✅ 规则已确定 → 自动抽阵营';
+ G.phase='draw';
+ setTimeout(function(){ren();},600);
 }
 
-// ═══════════ DRAW ═══════════
-function renderDraw(){
- document.getElementById('wheelArea').style.display='none';
- document.getElementById('drawArea').style.display='block';
- document.getElementById('diceArea').style.display='none';
- document.getElementById('pickArea').style.display='none';
- document.getElementById('resultArea').style.display='none';
- document.getElementById('shopArea').style.display='none';
+// ═══ DRAW ═══
+function rDraw(){
+ var rk = G.cur<4?G.ws[G.cur]:G.g5r;
+ if(!rk) rk='normal';
+ var isG5 = G.cur===4;
+ // Save finger picks before clearing for G5
+ var fA=isG5&&G.A.fi?[G.A.fi]:[];
+ var fB=isG5&&G.B.fi?[G.B.fi]:[];
+ G.A.pk=[];G.B.pk=[];
+ G.A._sanren=null;G.B._sanren=null;
+ G.fp=null;
+ // Restore finger picks
+ if(fA.length)G.A.pk=fA;if(fB.length)G.B.pk=fB;
 
- var rk = G.roules[G.curGame];
- var isG5 = G.curGame === 4;
- 
- var html='<div class="section-title">🎲 '+(isG5?'第5局':'第'+(G.curGame+1)+'局')+' · 抽阵营</div>';
- html+='<div style="text-align:center;font-size:16px;font-weight:600;margin-bottom:12px;color:#22c55e;">';
- html+=ROULE_NAMES[ROULE_KEYS.indexOf(rk)]+'</div>';
+ var h='<div class="section"><div class="section-title">'+(G.cur===4?'🏆 第5局':'第'+(G.cur+1)+'局')+' · 抽阵营</div>';
+ if(rk!=='normal') h+='<div style="text-align:center;font-size:16px;font-weight:600;margin-bottom:12px;color:#22c55e;">'+R_NAMES[R_KEYS.indexOf(rk)]+'</div>';
 
  if(rk==='lottery'){
- // 大乐透: draw 12 random chars
- var pool = shuffle(allCharIds).slice(0,12);
- // Store for later
- var html2='<div style="color:#94a3b8;margin-bottom:8px;">从118个人格中随机抽出12个候选：</div><div class="char-list">';
- for(var id of pool){
- html2+='<div class="char-item" style="cursor:default;"><span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
- }
- html2+='</div><div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmLotteryDraw()">✅ 确认候选池</button></div>';
- html+=html2;
- window._lotteryPool = pool;
+ // 大乐透: 每个罪人抽一个
+ var sinners={};G.lt=[];
+ for(var id of shf(ALL_IDS)){var s=sinner(id);if(!sinners[s]){sinners[s]=true;G.lt.push(id);}if(G.lt.length>=12)break;}
+ h+='<div style="color:#94a3b8;margin-bottom:8px;">12罪人各抽1个，共12个候选：</div><div class="char-list">';
+ for(var id of G.lt) h+='<div class="char-item" style="cursor:default;"><span class="ci-id" onclick="copyId(this.textContent)">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+ h+='</div><button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  } else if(rk==='fate'){
- // Fate: both auto-draw and auto-pick
- var fA = pick(ALL_FACTIONS);
- var fB = pick(ALL_FACTIONS);
- G.A.faction = fA; G.B.faction = fB;
- G.A.picked = shuffle(fA.ids).slice(0,5);
- G.B.picked = shuffle(fB.ids).slice(0,5);
- html+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div><div class="dc-tier">'+fA.ids.length+'人</div></div>';
- html+='<div style="font-size:22px;color:#475569;">⚡</div>';
- html+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div><div class="dc-tier">'+fB.ids.length+'人</div></div></div>';
- html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmFateDraw()">✅ 系统自动选人完成，进入对战</button></div>';
+ var fA=fillFac(pk(ALL_F)),fB=fillFac(pk(ALL_F));
+ G.A.fac=fA;G.B.fac=fB;
+ G.A.pk=pickUnique(fA.ids);G.B.pk=pickUnique(fB.ids);
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人</div>';
+ h+='<div style="font-size:22px;color:#475569;">⚡</div>';
+ h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人</div></div>';
+ h+='<button class="btn btn-primary" onclick="goDone()">✅ 已自动选人，进入对战</button></div>';
+ } else if(rk==='mirror'){
+ var mp=ALL_F.filter(function(f){return f.ids.length>=6;});
+ var fm=pk(mp);
+ G.A.fac=fillFac(JSON.parse(JSON.stringify(fm)));G.B.fac=fillFac(JSON.parse(JSON.stringify(fm)));
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">🔄 同一阵营</div><div class="dc-faction">'+fm.name+'</div>'+fm.ids.length+'人</div></div>';
+ h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
+ } else if(rk==='normal'){
+ // G5 normal: self-select tier
+ h+='<div style="text-align:center;color:#94a3b8;margin-bottom:8px;">普通对战 · 双方自选阵营</div>';
+ h+='<div class="draw-grid">'+selfSelect('A')+selfSelect('B')+'</div>';
+ h+='<button class="btn btn-primary" onclick="goDice()" style="margin-top:8px;">✅ 进入骰子阶段</button></div>';
  } else {
- var tierA=getTierForRoule(rk);
- var tierB=getTierForRoule(rk);
- if(rk==='mirror'){
- var mirrorPool = ALL_FACTIONS.filter(function(f){return f.ids.length>=6;});
- var fM = pick(mirrorPool);
- G.A.faction=JSON.parse(JSON.stringify(fM));
- G.B.faction=JSON.parse(JSON.stringify(fM));
- html+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">双方使用同一阵营</div><div class="dc-faction">'+fM.name+'</div><div class="dc-tier">'+fM.ids.length+'人</div></div>';
- html+='<div style="font-size:22px;color:#475569;">🔄</div>';
- html+='<div class="draw-card"><div style="color:#a855f7;">双方使用同一阵营</div><div class="dc-faction">'+fM.name+'</div><div class="dc-tier">'+fM.ids.length+'人</div></div></div>';
- html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmMirrorDraw()">✅ 确定，进入骰子阶段</button></div>';
- } else {
- var fA = pick(tierA);
- var fB = pick(tierB);
- G.A.faction=fA; G.B.faction=fB;
- html+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div><div class="dc-tier">'+fA.ids.length+'人</div></div>';
- html+='<div style="font-size:22px;color:#475569;">VS</div>';
- html+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div><div class="dc-tier">'+fB.ids.length+'人</div></div></div>';
- html+='<div style="margin-top:10px;"><button class="btn btn-primary" onclick="confirmNormalDraw()">✅ 确定，进入骰子阶段</button></div>';
+ var tA=(rk==='high')?F_HIGH:(rk==='low')?F_LOW:ALL_F;
+ var tB=(rk==='high')?F_HIGH:(rk==='low')?F_LOW:ALL_F;
+ if(!G.A.fac||!G.B.fac){
+  G.A.fac=G.A.fac||fillFac(pk(tA));
+  G.B.fac=G.B.fac||fillFac(pk(tB));
  }
+ var fA=G.A.fac,fB=G.B.fac;
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
+ if(isG5&&G.A.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'A\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
+ h+='</div>';
+ h+='<div style="font-size:22px;color:#475569;">VS</div>';
+ h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
+ if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
+ h+='</div></div>';
+ h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  }
- document.getElementById('drawArea').innerHTML=html;
-}
-
-function confirmLotteryDraw(){ G.phase='pick'; G.A.picked=[]; G.B.picked=[]; renderGame(); }
-function confirmFateDraw(){ G.phase='done'; renderGame(); }
-function confirmMirrorDraw(){ G.phase='dice'; renderGame(); }
-function confirmNormalDraw(){ G.phase='dice'; renderGame(); }
-
-function getTierForRoule(rk){
- if(rk==='high') return FACTIONS_HIGH;
- if(rk==='low') return FACTIONS_LOW;
- return ALL_FACTIONS;
-}
-
-// ═══════════ DICE ═══════════
-function renderDice(){
- document.getElementById('drawArea').style.display='none';
- document.getElementById('diceArea').style.display='flex';
- document.getElementById('diceArea').innerHTML=
- '<div><div style="font-size:11px;color:#818cf8;">蓝方</div><div class="dice-box" id="diceA">-</div></div>'+
- '<button class="btn btn-warning" onclick="rollDice()" id="diceBtn">🎲 掷骰子</button>'+
- '<div><div style="font-size:11px;color:#f472b6;">红方</div><div class="dice-box" id="diceB">-</div></div>';
- document.getElementById('statusArea').innerHTML='🎲 点击「掷骰子」决定谁先选人';
-}
-
-function rollDice(){
- var dA,dB;
- do{dA=rand(6)+1;dB=rand(6)+1;}while(dA===dB);
- document.getElementById('diceA').textContent=dA;
- document.getElementById('diceB').textContent=dB;
- document.getElementById('diceA').className='dice-box'+(dA>dB?' winner':'');
- document.getElementById('diceB').className='dice-box'+(dB>dA?' winner':'');
- document.getElementById('diceBtn').style.display='none';
-
- var rk = G.roules[G.curGame];
- var isLottery = rk === 'lottery';
- // 大乐透: 赢家先选; 其他: 赢家后选
- var firstPicker = isLottery ? (dA>dB?'A':'B') : (dA<dB?'A':'B');
- window._firstPicker = firstPicker;
- var fn = firstPicker==='A'?'蓝方先选':'红方先选';
- document.getElementById('statusArea').innerHTML= '➖ '+fn+'<br><button class="btn btn-success" onclick="startPicking()" style="margin-top:8px;">✅ 开始选人</button>';
-}
-
-function startPicking(){
- G.phase='pick';
- G.A.picked=[]; G.B.picked=[];
- renderGame();
-}
-
-// ═══════════ PICK ═══════════
-function renderPick(){
- document.getElementById('drawArea').style.display='none';
- document.getElementById('diceArea').style.display='none';
- document.getElementById('pickArea').style.display='block';
- document.getElementById('resultArea').style.display='none';
-
- var rk = G.roules[G.curGame];
- var isLottery = rk === 'lottery';
- var isFate = rk === 'fate';
-
- if(isFate){ return; } // already done
-
- var pA=G.A,pB=G.B;
-
- if(isLottery){
- renderLotteryPick();
- return;
- }
-
- var html='<div class="section-title">✋ 选人 · '+ROULE_NAMES[ROULE_KEYS.indexOf(rk)]+'</div>';
- html+='<div class="battle-setup">';
- html+=renderPickPanel('A',pA.faction);
- html+=renderPickPanel('B',pB.faction);
- html+='</div>';
- document.getElementById('pickArea').innerHTML=html;
- updatePickState();
-}
-
-function renderPickPanel(side,faction){
- var p=G[side];
- var need=5;
- var html='<div class="player-panel"><div class="pp-header">';
- html+='<span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
- html+='<span class="pp-faction">'+faction.name+'</span></div>';
- // Picks
- html+='<div style="font-size:12px;color:#64748b;">已选('+p.picked.length+'/5)</div><div class="pick-area">';
- for(var i=0;i<5;i++){
- if(i<p.picked.length){
- var id=p.picked[i];
- html+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fullName(id)+'</span></div>';
- }else{
- html+='<div class="pick-slot">'+(i+1)+'</div>';
- }
- }
- html+='</div>';
- // Available
- html+='<div style="font-size:12px;color:#64748b;margin-top:8px;">可选人物：</div><div class="char-list">';
- for(var id of faction.ids){
- if(p.picked.indexOf(id)>=0) continue;
- html+='<div class="char-item" onclick="addPick(\''+side+'\','+id+')">';
- html+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
- }
- html+='</div></div>';
- return html;
-}
-
-function renderLotteryPick(){
- var pool = window._lotteryPool || [];
- var html='<div class="section-title">🎲 大乐透 · 轮流选人</div>';
- html+='<div class="battle-setup">';
- for(var side of ['A','B']){
- var p=G[side];
- html+='<div class="player-panel"><div class="pp-header">';
- html+='<span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
- html+='<span style="font-size:12px;color:#64748b;">已选'+p.picked.length+'/5</span></div>';
- html+='<div class="pick-area">';
- for(var i=0;i<5;i++){
- if(i<p.picked.length){
- var id=p.picked[i];
- html+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fullName(id)+'</span></div>';
- }else{
- html+='<div class="pick-slot">'+(i+1)+'</div>';
- }
- }
- html+='</div></div>';
- }
- html+='</div>';
- // Available pool
- html+='<div style="font-size:12px;color:#64748b;margin-top:8px;">候选池（剩余'+pool.length+'人）：</div><div class="char-list">';
- for(var id of pool){
- var taken = G.A.picked.indexOf(id)>=0 || G.B.picked.indexOf(id)>=0;
- if(taken) continue;
- html+='<div class="char-item" onclick="lotteryPick('+id+')">';
- html+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fullName(id)+'</span></div>';
- }
- html+='</div>';
- html+='<div style="margin-top:10px;text-align:center;" id="lotteryStatus">';
- var total = G.A.picked.length + G.B.picked.length;
- var firstP = window._firstPicker;
- var turn = total < 10 ? ((total % 2 === 0) ? firstP : (firstP==='A'?'B':'A')) : null;
- if(turn){
- html+='✋ '+(turn==='A'?'蓝方':'红方')+'选人中（'+(G[turn].picked.length)+'/5）';
- }else{
- html+='<button class="btn btn-success" onclick="confirmLotteryDone()">✅ 选人完成，开始对战</button>';
- }
- html+='</div>';
- document.getElementById('pickArea').innerHTML=html;
-}
-
-function addPick(side,id){
- var p=G[side];
- if(p.picked.length>=5) return;
- p.picked.push(id);
- renderGame();
-}
-
-function lotteryPick(id){
- var total = G.A.picked.length + G.B.picked.length;
- var firstP = window._firstPicker;
- var turn = total < 10 ? ((total % 2 === 0) ? firstP : (firstP==='A'?'B':'A')) : null;
- if(!turn) return;
- G[turn].picked.push(id);
- // Remove from pool
- var pool=window._lotteryPool;
- var idx=pool.indexOf(id);
- if(idx>=0) pool.splice(idx,1);
- renderGame();
-}
-
-function confirmLotteryDone(){
- G.phase='done';
- renderGame();
-}
-
-function updatePickState(){
- var rk=G.roules[G.curGame];
- if(rk==='lottery'||rk==='fate') return;
- var total = G.A.picked.length + G.B.picked.length;
- var need = 10;
- var isLottery = false;
- var firstP = window._firstPicker;
- var turn = total < need ? ((total % 2 === 0) ? (isLottery?firstP:firstP) : (isLottery?(firstP==='A'?'B':'A'):(firstP==='A'?'B':'A'))) : null;
- // Simpler: first picker picks 5, then second picks 5
- if(total<5){
- turn=firstP;
- } else if(total<10){
- turn=firstP==='A'?'B':'A';
- } else { turn=null; }
- var status='';
- if(turn){
- status='✋ '+(turn==='A'?'蓝方':'红方')+'选人中（'+(G[turn].picked.length)+'/5）';
- } else {
- if(G.A.picked.length>=5&&G.B.picked.length>=5){
- status='<button class="btn btn-success" onclick="confirmPicksDone()">✅ 选人完成，开始对战</button>';
- }
- }
- document.getElementById('statusArea').innerHTML=status;
-}
-
-function confirmPicksDone(){
- G.phase='done'; renderGame();
-}
-
-// ═══════════ RESULT / GOLD ═══════════
-function renderDone(){
- document.getElementById('pickArea').style.display='none';
- document.getElementById('resultArea').style.display='block';
- var pA=G.A,pB=G.B;
- var html='<div class="section-title">'+(G.curGame===4?'🏆 第5局结果':'⚔️ 第'+(G.curGame+1)+'局结果')+'</div>';
- html+='<div class="battle-setup">';
- for(var side of ['A','B']){
- var p=G[side];
- var fn=p.faction?p.faction.name:'-';
- html+='<div class="player-panel"><div class="pp-header"><span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
- html+='<span class="pp-faction">'+fn+'</span></div>';
- html+='<div class="final-grid">';
- for(var id of p.picked){
- html+='<div class="final-card"><span class="fc-id">'+id+'</span>'+fullName(id)+'</div>';
- }
- html+='</div></div>';
- }
- html+='</div>';
- html+='<div style="text-align:center;margin-top:12px;">';
- if(G.curGame===4){
- html+='<div style="font-size:20px;font-weight:700;color:#f59e0b;margin-bottom:12px;">🏆 最终决战</div>';
- html+='<button class="btn btn-success" onclick="recordG5Win(\'A\')">🏆 蓝方胜</button> ';
- html+='<button class="btn btn-danger" onclick="recordG5Win(\'B\')">🏆 红方胜</button>';
- } else {
- html+='<button class="btn btn-success" onclick="recordWin(\'A\')">🏆 蓝方胜</button> ';
- html+='<button class="btn btn-danger" onclick="recordWin(\'B\')">🏆 红方胜</button>';
- }
- html+='</div>';
- document.getElementById('resultArea').innerHTML=html;
+ document.getElementById('mainArea').innerHTML=h;
  document.getElementById('statusArea').innerHTML='';
 }
 
-function recordWin(side){
- var rk=G.roules[G.curGame];
- var bonus = (rk==='lottery'||rk==='fate')?1:0;
- G[side].gold += 3 + bonus;
- var loser=side==='A'?'B':'A';
- G[loser].gold += 2;
- toast((side==='A'?'蓝方':'红方')+' 获胜！+'+(3+bonus)+'金'+(bonus?'(含奖励)':''));
- G.curGame++;
- if(G.curGame >= 4){
- // Enter shop phase
- G.phase='shop';
- renderScore();
- renderGame();
- } else {
- G.phase='wheel';
- renderScore();
- renderGame();
- updateTabs();
- }
+function selfSelect(side){
+ var opts=[];
+ for(var f of F_HIGH) opts.push({t:'上等',n:f.name});
+ for(var f of F_MID) opts.push({t:'中等',n:f.name});
+ for(var f of F_LOW) opts.push({t:'下等',n:f.name});
+ h='<select onchange="setFac(\''+side+'\',this.value)" style="padding:6px;background:#0f172a;border:1px solid #1e293b;border-radius:6px;color:#e2e8f0;font-family:inherit;">';
+ h+='<option value="">选择阵营...</option>';
+ for(var o of opts) h+='<option value="'+o.n+'">['+o.t+'] '+o.n+'</option>';
+ h+='</select>';
+ return '<div class="draw-card"><div style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</div></div>';
+}
+function setFac(side,nm){
+ for(var f of ALL_F){if(f.name===nm){G[side].fac=f;G[side].pk=[];return;}}
 }
 
-function recordG5Win(side){
- toast('🏆 '+(side==='A'?'蓝方':'红方')+' 赢得轮盘赌！');
+function rerollFac(side){
+ var p=G[side];
+ if(!p.reroll){t('没有重抽币了');return;}
+ p.reroll=false; // consume
+ var rk=G.g5r;
+ var pool=(rk==='high')?F_HIGH:(rk==='low')?F_LOW:ALL_F;
+ p.fac=fillFac(pk(pool));
+ p.pk=[];
+ if(p.fi) p.pk.push(p.fi);
+ ren();
+ t((side==='A'?'蓝方':'红方')+' 重抽 → '+p.fac.name);
+}
+
+function goDice(){
+ // G5: if only ONE side bought 'first', they get the advantageous position
+ var rk=G.cur<4?G.ws[G.cur]:G.g5r;
+ var isLot=rk==='lottery';
+ var onlyFirst = (G.A.first||G.B.first) && !(G.A.first&&G.B.first);
+ if(G.cur===4 && onlyFirst){
+ // 大乐透:先选=赚, 其他:后选=赚
+ var adv = G.A.first?'A':'B';
+ G.fp = isLot ? adv : (adv==='A'?'B':'A');
+ G.phase='pick';rPick();return;
+ }
+ G.phase='dice';rDice();
+}
+function goDone(){G.phase='done';ren();}
+
+// ═══ DICE ═══
+function rDice(){
+ var h='<div class="section"><div class="section-title">🎲 掷骰子</div><div class="dice-row">';
+ h+='<div><div style="font-size:11px;color:#818cf8;">蓝方</div><div class="dice-box" id="da">-</div></div>';
+ h+='<button class="btn btn-warning" onclick="dice()" id="db">🎲 掷骰子</button>';
+ h+='<div><div style="font-size:11px;color:#f472b6;">红方</div><div class="dice-box" id="db2">-</div></div></div></div>';
+ document.getElementById('mainArea').innerHTML=h;
+ document.getElementById('statusArea').innerHTML='🎲 点击「掷骰子」决定选人顺序';
+}
+
+function dice(){
+ var rk=G.cur<4?G.ws[G.cur]:G.g5r;
+ var isLot=rk==='lottery';
+ var da,db;
+ do{da=r(6)+1;db=r(6)+1;}while(da===db);
+ document.getElementById('da').textContent=da;document.getElementById('db2').textContent=db;
+ document.getElementById('da').className='dice-box'+(da>db?' winner':'');
+ document.getElementById('db2').className='dice-box'+(db>da?' winner':'');
+ document.getElementById('db').style.display='none';
+ // 大乐透:赢家先选 其他:赢家后选
+ G.fp = isLot ? (da>db?'A':'B') : (da<db?'A':'B');
  document.getElementById('statusArea').innerHTML=
- '🏆 系列赛结束！'+(side==='A'?'蓝方':'红方')+' 获胜！<br><br><button class="btn btn-gold" onclick="initMatch()">🔄 新系列赛</button>';
+ (G.fp==='A'?'🔵 蓝方先选':'🔴 红方先选')+'<br><button class="btn btn-success" onclick="goPick()" style="margin-top:8px;">✅ 开始选人</button>';
 }
 
-// ═══════════ SHOP ═══════════
-function enterShop(){
- G.phase='shop';
- renderGame();
+function goPick(){G.phase='pick';rPick();}
+
+// ═══ PICK ═══
+function rPick(){
+ var rk=G.cur<4?G.ws[G.cur]:G.g5r;
+ if(rk==='fate'){goDone();return;}
+ if(rk==='lottery'){rLotPick();return;}
+
+ var first=G.fp;
+ var second=first==='A'?'B':'A';
+ var active;
+ if(G[first].pk.length<5) active=first;
+ else if(G[second].pk.length<5) active=second;
+ else active=null;
+
+ var h='<div class="section"><div class="section-title">✋ 选人 · '+(rk?R_NAMES[R_KEYS.indexOf(rk)]||'普通':'普通')+'</div>';
+ h+='<div class="battle-panels">'+pPanel('A',active)+pPanel('B',active)+'</div></div>';
+ document.getElementById('mainArea').innerHTML=h;
+
+ if(active) document.getElementById('statusArea').innerHTML='✋ '+(active==='A'?'蓝方':'红方')+'选人';
+ else document.getElementById('statusArea').innerHTML='<button class="btn btn-success" onclick="goDone()">✅ 选人完成，开战</button>';
 }
 
-function renderShop(){
- document.getElementById('wheelArea').style.display='none';
- document.getElementById('drawArea').style.display='none';
- document.getElementById('diceArea').style.display='none';
- document.getElementById('pickArea').style.display='none';
- document.getElementById('resultArea').style.display='none';
- document.getElementById('shopArea').style.display='block';
-
- var html='<div class="section-title">🛒 赌场商店 · 第5局准备</div>';
- html+='<div style="text-align:center;margin-bottom:12px;">';
- html+='<span class="gold-display" id="shopGoldA">🔵 蓝方 '+G.A.gold+'金</span>';
- html+='<span style="margin:0 16px;color:#64748b;">🆚</span>';
- html+='<span class="gold-display" id="shopGoldB">🔴 红方 '+G.B.gold+'金</span>';
- html+='</div>';
- html+='<div class="shop-grid"><div class="shop-column">';
- html+=renderShopColumn('A');
- html+='</div><div class="shop-column">';
- html+=renderShopColumn('B');
- html+='</div></div>';
- html+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="confirmShop()">✅ 双方购买完毕，进入第5局</button></div>';
- document.getElementById('shopArea').innerHTML=html;
-}
-
-function renderShopColumn(side){
- var p=G[side];
- var shop=side==='A'?G.shopA:G.shopB;
- var items=[
- {key:'reroll',icon:'🪙',name:'重抽币',price:2},
- {key:'first',icon:'🎲',name:'先手',price:2},
- {key:'finger',icon:'☝️',name:'命运手指',price:6},
- {key:'slotup',icon:'⚡',name:'行动槽增幅',price:6},
- ];
- var html='<div class="shop-header">'+(side==='A'?'🔵 蓝方':'🔴 红方')+' 购物车</div>';
- for(var item of items){
- var bought = shop[item.key];
- var cls=bought?'shop-item bought':'shop-item';
- html+='<div class="'+cls+'" onclick="toggleShopItem(\''+side+'\',\''+item.key+'\','+item.price+')">';
- html+='<span class="si-icon">'+item.icon+'</span>';
- html+='<span class="si-name">'+item.name+'</span>';
- html+='<span class="si-price">'+item.price+'金</span>';
- if(bought) html+='<span style="font-size:12px;color:#22c55e;">✓</span>';
- html+='</div>';
+function pPanel(side,active){
+ var p=G[side],f=p.fac;
+ var isTurn=active===side;
+ var h='<div class="player-panel"><div class="pp-header"><span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ h+='<span class="pp-faction">'+(f?f.name:'-')+'</span></div>';
+ h+='<div style="font-size:12px;color:#64748b;">已选 ('+p.pk.length+'/5)</div><div class="pick-area">';
+ for(var i=0;i<5;i++){
+ if(i<p.pk.length){
+ var id=p.pk[i];
+ h+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fn(id)+'</span>';
+ if(isTurn) h+='<span class="remove" onclick="rmPk(\''+side+'\','+i+')">x</span>';
+ h+='</div>';
+ }else h+='<div class="pick-slot">'+(i+1)+'</div>';
  }
- // Roulette effects
- html+='<div style="margin-top:12px;font-size:13px;font-weight:600;color:#94a3b8;">🎰 轮盘效果</div>';
- var roules = [
- {key:'roule_high',icon:'🔴',name:'全上等',price:4},
- {key:'roule_low',icon:'🔵',name:'全下等',price:4},
- {key:'roule_mirror',icon:'🟣',name:'镜像对决',price:4},
- {key:'roule_lottery',icon:'🎲',name:'大乐透',price:4},
- {key:'roule_fate',icon:'🎰',name:'命运之手',price:4},
- ];
- for(var item of roules){
- var bought = shop[item.key];
- var cls=bought?'shop-item bought':'shop-item';
- html+='<div class="'+cls+'" onclick="toggleShopItem(\''+side+'\',\''+item.key+'\','+item.price+')">';
- html+='<span class="si-icon">'+item.icon+'</span>';
- html+='<span class="si-name">'+item.name+'</span>';
- html+='<span class="si-price">'+item.price+'金</span>';
- if(bought) html+='<span style="font-size:12px;color:#22c55e;">✓</span>';
- html+='</div>';
+ h+='</div>';
+ if(isTurn&&f){
+ var locked={};
+ var pickedSinners={};
+ for(var pid of p.pk) pickedSinners[sinner(pid)]=true;
+ var displayList=[];
+ for(var id of f.ids){
+ if(p.pk.indexOf(id)>=0) continue;
+ if(pickedSinners[sinner(id)]) locked[id]=true;
+ displayList.push(id);
  }
- return html;
-}
-
-function toggleShopItem(side,key,price){
- var p=G[side];
- var shop=side==='A'?G.shopA:G.shopB;
- if(shop[key]){
- // Remove
- delete shop[key];
- p.gold += price;
+ h+='<div style="font-size:12px;color:#64748b;margin-top:6px;">点击添加（🔒=同罪人被锁）：</div><div class="char-list">';
+ for(var id of displayList){
+ var isLocked=locked[id]||false;
+ var isSan=SANREN.indexOf(id)>=0;
+ var canAdd=!isLocked&&p.pk.length<5;
+ h+='<div class="char-item" style="'+(isLocked?'opacity:0.4;cursor:default;':'')+'"'+(canAdd?' onclick="adPk(\''+side+'\','+id+')"':'')+'>';
+ h+='<span class="ci-id" onclick="event.stopPropagation();copyId(this.textContent)">'+id+'</span>';
+ h+='<span class="ci-name">'+fn(id)+'</span>';
+ if(isLocked) h+='<span style="font-size:11px;color:#64748b;">🔒</span>';
+ if(isSan) h+='<span style="font-size:10px;padding:1px 5px;border-radius:4px;background:#64748b;color:#fff;">[散]</span>';
+ h+='</div>';
+ }
+ // Auto-fill sanren if not enough unique options (cached)
+ var uniqueCount=0;
+ for(var id of displayList){if(!locked[id]) uniqueCount++;}
+ if(uniqueCount<(5-p.pk.length)){
+ if(!p._sanren){
+ var pool=SANREN.filter(function(i){return p.pk.indexOf(i)<0&&displayList.indexOf(i)<0&&!pickedSinners[sinner(i)];});
+ if(pool.length>0) p._sanren=pool[r(pool.length)];
+ }
+ if(p._sanren&&p.pk.indexOf(p._sanren)<0){
+ h+='<div style="font-size:12px;color:#f59e0b;margin-top:4px;">自动补位：</div>';
+ h+='<div class="char-item" onclick="adPk(\''+side+'\','+p._sanren+')"><span class="ci-id" onclick="event.stopPropagation();copyId(this.textContent)">'+p._sanren+'</span><span class="ci-name">'+fn(p._sanren)+'</span><span style="font-size:10px;padding:1px 5px;border-radius:4px;background:#64748b;color:#fff;">[散]</span></div>';
+ }
+ }
+ h+='</div>';
  } else {
- if(p.gold < price){ toast('金币不足！'); return; }
- shop[key] = true;
- p.gold -= price;
+ h+='<div style="font-size:12px;color:#64748b;padding:8px 0;">⏳ 等待对方选人...</div>';
  }
- renderGame();
+ h+='</div>';
+ return h;
+}function adPk(side,id){var p=G[side];if(p.pk.length>=5)return;p.pk.push(id);ren();}
+function rmPk(side,i){var p=G[side];if(i<p.pk.length)p.pk.splice(i,1);ren();}
+
+// ═══ LOTTERY PICK ═══
+function rLotPick(){
+ var h='<div class="section"><div class="section-title">🎲 大乐透 · 轮流选人</div>';
+ h+='<div class="battle-panels">';
+ for(var side of ['A','B']){
+ var p=G[side];
+ h+='<div class="player-panel"><div class="pp-header"><span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ h+='<span style="font-size:12px;color:#64748b;">'+p.pk.length+'/5</span></div>';
+ h+='<div class="pick-area">';
+ for(var i=0;i<5;i++){
+ if(i<p.pk.length){
+ var id=p.pk[i];
+ h+='<div class="pick-slot filled"><span class="pick-id">'+id+'</span><span class="pick-name">'+fn(id)+'</span>';
+ h+='<span class="remove" onclick="rmLot('+i+',\''+side+'\')">×</span></div>';
+ }else h+='<div class="pick-slot">'+(i+1)+'</div>';
+ }
+ h+='</div></div>';
+ }
+ h+='</div>';
+ var taken=G.A.pk.length+G.B.pk.length;
+ var turn = taken<10?((taken%2===0)?G.fp:(G.fp==='A'?'B':'A')):null;
+ if(turn) h+='<div style="margin:8px 0;font-size:13px;color:#94a3b8;">✋ '+(turn==='A'?'蓝方':'红方')+'选人</div>';
+ else h+='<button class="btn btn-success" onclick="goDone()">✅ 选人完成</button>';
+ h+='<div class="char-list">';
+ for(var id of G.lt){
+ if(G.A.pk.indexOf(id)>=0||G.B.pk.indexOf(id)>=0) continue;
+ h+='<div class="char-item" onclick="ltPk('+id+')"><span class="ci-id" onclick="event.stopPropagation();copyId(this.textContent)">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+ }
+ h+='</div>';
+ document.getElementById('mainArea').innerHTML=h;
+}
+function ltPk(id){
+ var taken=G.A.pk.length+G.B.pk.length;
+ if(taken>=10) return;
+ var turn=taken<10?((taken%2===0)?G.fp:(G.fp==='A'?'B':'A')):null;
+ if(!turn) return;
+ G[turn].pk.push(id);
+ ren();
+}
+function rmLot(i,side){
+ G[side].pk.splice(i,1);
+ ren();
 }
 
-function confirmShop(){
- // Determine G5 roulette effect
- var rA = Object.keys(G.shopA).filter(function(k){return k.startsWith('roule_');});
- var rB = Object.keys(G.shopB).filter(function(k){return k.startsWith('roule_');});
+// ═══ DONE ═══
+function rDone(){
+ document.getElementById('statusArea').innerHTML='';
+ // Assign slot-up random unit for G5
+ if(G.cur===4){
+ for(var side of ['A','B']){
+ var p=G[side];
+ if(p.su&&!p.suId&&p.pk.length>0) p.suId=p.pk[r(p.pk.length)];
+ }
+ }
+ var h='<div class="section"><div class="section-title">'+(G.cur===4?'🏆 第5局结果':'⚔️ 第'+(G.cur+1)+'局结果')+'</div>';
+ h+='<div class="battle-panels">';
+ for(var side of ['A','B']){
+ var p=G[side];
+ var fname=p.fac?p.fac.name:'-';
+ h+='<div class="player-panel"><div class="pp-header"><span class="pp-name" style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</span>';
+ h+='<span class="pp-faction">'+fname+'</span></div><div class="final-grid">';
+ for(var id of p.pk){
+ var fg=G.cur===4&&p.fi===id;
+ var sg=G.cur===4&&p.su&&p.suId===id;
+ h+='<div class="final-card'+(fg?' finger-card':'')+(sg?' finger-card':'')+'" style="'+(sg?'border-color:#f59e0b;background:rgba(245,158,11,0.1);':'')+'"><span class="fc-id" onclick="copyId(this.textContent)" style="cursor:pointer;">'+id+'</span>'+fn(id);
+ if(fg) h+=' ☝️';
+ if(sg) h+=' ⚡';
+ h+='</div>';
+ }
+ h+='</div></div>';
+ }
+ h+='</div><div style="text-align:center;margin-top:12px;">';
+ if(G.cur===4){
+ h+='<div style="font-size:18px;font-weight:700;color:#f59e0b;margin-bottom:12px;">🏆 最终决战</div>';
+ h+='<button class="btn btn-success" onclick="g5W(\'A\')">🏆 蓝方胜</button> ';
+ h+='<button class="btn btn-danger" onclick="g5W(\'B\')">🏆 红方胜</button>';
+ } else {
+ h+='<button class="btn btn-success" onclick="gw(\'A\')">🏆 蓝方胜</button> ';
+ h+='<button class="btn btn-danger" onclick="gw(\'B\')">🏆 红方胜</button>';
+ }
+ h+='</div>';
+ document.getElementById('mainArea').innerHTML=h;
+}
+
+function gw(side){
+ var rk=G.ws[G.cur];
+ var bn=(rk==='lottery'||rk==='fate')?1:0;
+ G[side].g+=3+bn;
+ G[side==='A'?'B':'A'].g+=2;
+ t((side==='A'?'蓝方':'红方')+'胜！+'+(3+bn)+'金'+(bn?'(含奖励)':''));
+ G.cur++;
+ if(G.cur>=4){G.phase='shop';ren();}else{G.phase='wheel';ren();tabUpd();}
+}
+
+function g5W(side){
+ t('🏆 '+(side==='A'?'蓝方':'红方')+'赢得轮盘赌！');
+ document.getElementById('statusArea').innerHTML='🏆 系列赛结束！'+(side==='A'?'蓝方':'红方')+'获胜！<br><br><button class="btn btn-gold" onclick="res()">🔄 新系列赛</button>';
+}
+
+// ═══ SHOP ═══
+function enterShop(){G.phase='shop';rShop();}
+
+function rShop(){
+ var h='<div class="section"><div class="section-title">🛒 赌场商店</div>';
+ h+='<div style="text-align:center;margin-bottom:10px;">';
+ h+='<span class="gold-display">🔵 蓝方 '+G.A.g+'金</span>';
+ h+='<span style="margin:0 16px;color:#64748b;">🆚</span>';
+ h+='<span class="gold-display">🔴 红方 '+G.B.g+'金</span>';
+ h+='</div>';
+ h+='<div class="shop-grid"><div class="shop-column">';
+ h+=sCol('A');h+='</div><div class="shop-column">';h+=sCol('B');h+='</div></div>';
+ h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="sOK()">✅ 购买完成，进入第5局</button></div>';
+ document.getElementById('mainArea').innerHTML=h;
+ document.getElementById('statusArea').innerHTML='双方同时选商品，互相可见';
+}
+
+function sCol(side){
+ var p=G[side];
+ var its=[
+ {k:'reroll',ic:'🪙',nm:'重抽币',pr:2},
+ {k:'first',ic:'🎲',nm:'先手',pr:2},
+ {k:'finger',ic:'☝️',nm:'命运手指',pr:6},
+ {k:'slotup',ic:'⚡',nm:'行动槽增幅',pr:6},
+ ];
+ var h='<div class="shop-section"><div class="shop-section-title">'+(side==='A'?'🔵 蓝方':'🔴 红方')+' · 正常商品</div>';
+ for(var it of its){
+ var b=p[it.k];
+ h+='<div class="shop-item'+(b?' bought':'')+'" onclick="tog(\''+side+'\',\''+it.k+'\','+it.pr+')">';
+ h+='<span class="si-icon">'+it.ic+'</span><span class="si-name">'+it.nm+'</span>';
+ h+='<span class="si-price">'+it.pr+'金</span>';
+ if(b) h+='<span class="si-check">✓</span>';
+ h+='</div>';
+ }
+ h+='</div>';
+ h+='<div class="shop-section"><div class="shop-section-title">🎰 轮盘效果</div>';
+ var rs=[
+ {k:'rh',ic:'🔴',nm:'全上等',pr:4},{k:'rl',ic:'🔵',nm:'全下等',pr:4},
+ {k:'rm',ic:'🟣',nm:'镜像对决',pr:4},{k:'rlt',ic:'🎲',nm:'大乐透',pr:4},
+ {k:'rf',ic:'🎰',nm:'命运之手',pr:4},
+ ];
+ for(var it of rs){
+ var b=p[it.k];
+ h+='<div class="shop-item'+(b?' bought':'')+'" onclick="tog(\''+side+'\',\''+it.k+'\','+it.pr+')">';
+ h+='<span class="si-icon">'+it.ic+'</span><span class="si-name">'+it.nm+'</span>';
+ h+='<span class="si-price">'+it.pr+'金</span>';
+ if(b) h+='<span class="si-check">✓</span>';
+ h+='</div>';
+ }
+ h+='</div>';
+ return h;
+}
+
+function tog(side,k,pr){
+ var p=G[side];
+ if(p[k]){delete p[k];p.g+=pr;rShop();return;}
+ // Roulette effects: each side can only buy one
+ if(['rh','rl','rm','rlt','rf'].indexOf(k)>=0){
+  for(var rk of ['rh','rl','rm','rlt','rf']) if(p[rk]){t('轮盘效果每方限购一个！');return;}
+ }
+ if(p.g<pr){t('金币不足！');return;}
+ p[k]=true;p.g-=pr;rShop();
+}
+
+function sOK(){
+ // Gather roulette purchases (only roulette keys, not 'reroll' or other items)
+ var rA=[],rB=[];
+ var rKeys=['rh','rl','rm','rlt','rf'];
+ var map={'rh':'high','rl':'low','rm':'mirror','rlt':'lottery','rf':'fate'};
+ for(var k of rKeys){if(G.A[k])rA.push(map[k]);if(G.B[k])rB.push(map[k]);}
  var chosen;
- if(rA.length===0 && rB.length===0){
- chosen = null; // normal match
- } else if(rA.length>0 && rB.length===0){
- chosen = rA[0];
- } else if(rA.length===0 && rB.length>0){
- chosen = rB[0];
- } else {
- // Both bought - random between them
- var pool = rA.concat(rB);
- chosen = pool[rand(pool.length)];
+ if(rA.length===0&&rB.length===0) chosen=null;
+ else if(rA.length>0&&rB.length===0) chosen=rA[0];
+ else if(rA.length===0&&rB.length>0) chosen=rB[0];
+ else{
+ var pool=rA.concat(rB);
+ chosen=pool[r(pool.length)];
  }
- window._g5Roule = chosen;
-
- // Apply effects
- // Reroll
- var hasRerollA = G.shopA.reroll;
- var hasRerollB = G.shopB.reroll;
- // First pick
- var hasFirstA = G.shopA.first;
- var hasFirstB = G.shopB.first;
- // Finger
- if(G.shopA.finger){
- var fd = pick(FINGER_DATA);
- G.A.fingerFaction = fd;
- G.A.fingerId = pick(fd.ids);
+ G.g5r=chosen;
+ // Apply finger
+ for(var side of ['A','B']){
+ var p=G[side];
+ if(p.finger){
+ var fd=pk([{n:'拇指',i:[10512,10916]},{n:'食指',i:[10115,10314]},{n:'中指',i:[10715,11115]},{n:'环指',i:[10215,10614,10915]},{n:'小指',i:[10415,11015]}]);
+ p.ff=fd.n;p.fi=pk(fd.i);
  }
- if(G.shopB.finger){
- var fd2 = pick(FINGER_DATA);
- G.B.fingerFaction = fd2;
- G.B.fingerId = pick(fd2.ids);
+ if(p.first) p.first=true;
+ if(p.reroll) p.reroll=true;
+ if(p.slotup) p.su=true;
  }
- // Action slot up - random unit
- if(G.shopA.slotup){
- // Just a flag for display
- G.A.slotUp = true;
- }
- if(G.shopB.slotup){
- G.B.slotUp = true;
- }
-
  // Show summary
- var summary = '<div style="text-align:center;margin-bottom:12px;">';
- summary += '<div style="font-size:16px;font-weight:700;color:#f59e0b;">🛒 购买结果</div>';
- summary += '<div style="display:flex;justify-content:center;gap:24px;margin-top:8px;">';
- var itemsA = Object.keys(G.shopA).filter(function(k){return !k.startsWith('roule_');});
- var itemsB = Object.keys(G.shopB).filter(function(k){return !k.startsWith('roule_');});
- summary += '<div style="text-align:left;"><span style="color:#818cf8;">🔵 蓝方:</span> '+(itemsA.length?itemsA.join(', '):'无')+'</div>';
- summary += '<div style="text-align:left;"><span style="color:#f472b6;">🔴 红方:</span> '+(itemsB.length?itemsB.join(', '):'无')+'</div>';
- summary += '</div>';
- if(chosen){
- var rn = ROULE_NAMES[ROULE_KEYS.indexOf(chosen.replace('roule_',''))];
- summary += '<div style="margin-top:8px;color:#22c55e;">第5局规则：'+rn+'</div>';
- } else {
- summary += '<div style="margin-top:8px;color:#94a3b8;">第5局：普通对战（自选阵营）</div>';
- }
- summary += '</div>';
- summary += '<div style="text-align:center;margin-top:8px;"><button class="btn btn-primary" onclick="startG5()">⚔️ 进入第5局</button></div>';
- document.getElementById('shopArea').innerHTML=summary;
+ var sm='<div class="section"><div style="text-align:center;">';
+ sm+='<div style="font-size:16px;font-weight:700;color:#f59e0b;margin-bottom:8px;">🛒 购买结果</div>';
+ var itemsA=[],itemsB=[];
+ var keys=['reroll','first','finger','slotup','rh','rl','rm','rlt','rf'];
+ var nameMap={reroll:'重抽币',first:'先手',finger:'命运手指',slotup:'行动槽增幅',rh:'全上等',rl:'全下等',rm:'镜像对决',rlt:'大乐透',rf:'命运之手'};
+ for(var k of keys){if(G.A[k])itemsA.push(nameMap[k]||k);if(G.B[k])itemsB.push(nameMap[k]||k);}
+ sm+='<div style="display:flex;justify-content:center;gap:24px;font-size:13px;">';
+ sm+='<div style="text-align:left;"><span style="color:#818cf8;">🔵 蓝方:</span> '+(itemsA.length?itemsA.join(', '):'无购买')+'</div>';
+ sm+='<div style="text-align:left;"><span style="color:#f472b6;">🔴 红方:</span> '+(itemsB.length?itemsB.join(', '):'无购买')+'</div>';
+ sm+='</div>';
+ if(chosen){var ri=R_KEYS.indexOf(chosen);if(ri>=0)sm+='<div style="margin-top:8px;color:#22c55e;font-weight:600;">第5局规则：'+R_NAMES[ri]+'</div>';}
+ else sm+='<div style="margin-top:8px;color:#94a3b8;">第5局：普通对战</div>';
+ sm+='<div style="margin-top:12px;"><button class="btn btn-gold" onclick="goG5()">⚔️ 进入第5局</button></div></div></div>';
+ document.getElementById('mainArea').innerHTML=sm;
 }
 
-function startG5(){
- G.curGame = 4;
- G.phase = 'draw';
- window._g5Applied = true;
- G.A.picked = [];
- G.B.picked = [];
- if(G.A.fingerId){
- // Add finger pick
- G.A.picked.push(G.A.fingerId);
- }
- if(G.B.fingerId){
- G.B.picked.push(G.B.fingerId);
- }
- renderScore();
- updateTabs();
- renderGame();
+function goG5(){
+ G.cur=4;G.phase='draw';G.A.pk=[];G.B.pk=[];
+ if(G.A.fi) G.A.pk.push(G.A.fi);
+ if(G.B.fi) G.B.pk.push(G.B.fi);
+ ren();tabUpd();
 }
 
-// ═══════════ RENDER ═══════════
-function renderGame(){
- if(G.phase==='wheel') renderWheel();
- else if(G.phase==='draw') renderDraw();
- else if(G.phase==='dice') renderDice();
- else if(G.phase==='pick') renderPick();
- else if(G.phase==='done') renderDone();
- else if(G.phase==='shop') renderShop();
- else if(G.phase==='start') initMatch();
- updateSteps();
+// ═══ UI ═══
+function sw(i){
+ if(i<G.cur) return; // can't go back
 }
 
-function renderScore(){
- var sA=G.A.gold, sB=G.B.gold;
- document.getElementById('scoreBar').innerHTML=
- '<div class="score-box"><div class="sb-label" style="color:#818cf8;">🔵 蓝方</div><div class="sb-val" style="color:#818cf8;">'+sA+'</div><div class="sb-gold">💰 '+sA+'金</div></div>'+
- '<div class="score-box"><div class="sb-label">第</div><div class="sb-val" id="gameNum">'+(G.curGame+1)+'</div><div class="sb-label">/ 5 场</div></div>'+
- '<div class="score-box"><div class="sb-label" style="color:#f472b6;">🔴 红方</div><div class="sb-val" style="color:#f472b6;">'+sB+'</div><div class="sb-gold">💰 '+sB+'金</div></div>';
- document.getElementById('gameNum').textContent = G.curGame+1;
-}
-
-function updateTabs(){
- var tabs=document.querySelectorAll('.game-tab');
- tabs.forEach(function(t,i){
+function tabUpd(){
+ var ts=document.querySelectorAll('.game-tab');
+ ts.forEach(function(t,i){
  t.classList.remove('active','played');
- if(i===G.curGame) t.classList.add('active');
- else if(i<G.curGame) t.classList.add('played');
+ if(i===G.cur) t.classList.add('active');
+ else if(i<G.cur) t.classList.add('played');
  });
+ scUpd();
+}
+function scUpd(){
+ document.getElementById('scoreBar').innerHTML=
+ '<div class="score-box"><div class="sb-label" style="color:#818cf8;">🔵 蓝方</div><div class="sb-val" style="color:#818cf8;">'+G.A.g+'</div><div class="sb-gold">💰 '+G.A.g+'金</div></div>'+
+ '<div class="score-box"><div class="sb-label">第</div><div class="sb-val">'+(G.cur+1)+'</div><div class="sb-label">/ 5 场</div></div>'+
+ '<div class="score-box"><div class="sb-label" style="color:#f472b6;">🔴 红方</div><div class="sb-val" style="color:#f472b6;">'+G.B.g+'</div><div class="sb-gold">💰 '+G.B.g+'金</div></div>';
 }
 
-function updateSteps(){
- var steps=['轮盘','抽阵营','骰子','选人','开战'];
- var curIdx=0;
- if(G.phase==='wheel') curIdx=0;
- else if(G.phase==='draw') curIdx=1;
- else if(G.phase==='dice') curIdx=2;
- else if(G.phase==='pick') curIdx=3;
- else if(G.phase==='done') curIdx=4;
- else if(G.phase==='shop') curIdx=0;
- var html='';
- for(var i=0;i<steps.length;i++){
- var cls='step';
- if(i<curIdx) cls+=' done';
- else if(i===curIdx) cls+=' current';
- html+='<div class="step '+cls+'">'+(i<curIdx?'✓':'')+steps[i]+'</div>';
- }
- document.getElementById('stepBar').innerHTML=html;
-}
-
-// ═══════════ INIT ═══════════
-initMatch();
+// ═══ INIT ═══
+res();
 </script>
 </body>
 </html>
