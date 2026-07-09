@@ -487,17 +487,77 @@ function rDraw(){
  h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
  if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div></div>';
+ // Ban UI for all modes except lottery
+ if(G.cur===4){
+  var brk=G.g5r;
+  if(brk!=='lottery'){
+   for(var s of ['A','B']){
+    var other=s==='A'?'B':'A';
+    if(G[s].ban&&!G[s]._banned&&G[other].fac){
+     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
+     h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会在对方选人列表出现）：</div>';
+     h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
+     for(var id of G[other].fac.ids){
+      h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
+      h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+     }
+     h+='</div></div>';
+     break;
+    }
+   }
+  }
+ }
  h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="goDone()">✅ 已自动选人，进入对战</button></div>';
  } else if(rk==='mirror'){
  var mp=ALL_F.filter(function(f){return f.ids.length>=6;});
  var fm=pk(mp);
  G.A.fac=fillFac(JSON.parse(JSON.stringify(fm)));G.B.fac=fillFac(JSON.parse(JSON.stringify(fm)));
  h+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">🔄 同一阵营</div><div class="dc-faction">'+fm.name+'</div>'+fm.ids.length+'人</div></div>';
+ // Ban UI for all modes except lottery
+ if(G.cur===4){
+  var brk=G.g5r;
+  if(brk!=='lottery'){
+   for(var s of ['A','B']){
+    var other=s==='A'?'B':'A';
+    if(G[s].ban&&!G[s]._banned&&G[other].fac){
+     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
+     h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会在对方选人列表出现）：</div>';
+     h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
+     for(var id of G[other].fac.ids){
+      h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
+      h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+     }
+     h+='</div></div>';
+     break;
+    }
+   }
+  }
+ }
  h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  } else if(rk==='normal'){
  // G5 normal: self-select tier
  h+='<div style="text-align:center;color:#94a3b8;margin-bottom:8px;">普通对战 · 双方自选阵营</div>';
  h+='<div class="draw-grid">'+selfSelect('A')+selfSelect('B')+'</div>';
+ // Ban UI for all modes except lottery
+ if(G.cur===4){
+  var brk=G.g5r;
+  if(brk!=='lottery'){
+   for(var s of ['A','B']){
+    var other=s==='A'?'B':'A';
+    if(G[s].ban&&!G[s]._banned&&G[other].fac){
+     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
+     h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会在对方选人列表出现）：</div>';
+     h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
+     for(var id of G[other].fac.ids){
+      h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
+      h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+     }
+     h+='</div></div>';
+     break;
+    }
+   }
+  }
+ }
  h+='<button class="btn btn-primary" onclick="goDice()" style="margin-top:8px;">✅ 进入骰子阶段</button></div>';
  } else {
  var tA=(rk==='high')?F_HIGH:(rk==='low')?F_LOW:ALL_F;
@@ -515,22 +575,7 @@ function rDraw(){
  if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div></div>';
  
- if(G.cur===4){
-  for(var s of ['A','B']){
-   var other=s==='A'?'B':'A';
-   if(G[s].ban&&!G[s]._banned&&G[other].fac){
-    h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
-    h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会出现在对方选人列表）：</div>';
-    h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
-    for(var id of G[other].fac.ids){
-     h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
-     h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
-    }
-    h+='</div></div>';
-    break;
-   }
-  }
- }
+
 h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  }
  document.getElementById('mainArea').innerHTML=h;
@@ -861,7 +906,28 @@ function rShop(){
  h+='<div class="shop-grid"><div class="shop-column">';
  h+=sCol('A');h+='</div><div class="shop-column">';h+=sCol('B');h+='</div></div>';
  h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="sOK()">✅ 购买完成，进入第5局</button></div>';
- document.getElementById('mainArea').innerHTML=h;
+ 
+ // Universal ban UI for all modes (except lottery)
+ if(G.cur===4){
+  var brk=G.g5r;
+  if(brk!=='lottery'){
+   for(var s of ['A','B']){
+    var other=s==='A'?'B':'A';
+    if(G[s].ban&&!G[s]._banned&&G[other].fac){
+     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
+     h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会在对方选人列表出现）：</div>';
+     h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
+     for(var id of G[other].fac.ids){
+      h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
+      h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+     }
+     h+='</div></div>';
+     break;
+    }
+   }
+  }
+ }
+document.getElementById('mainArea').innerHTML=h;
  document.getElementById('statusArea').innerHTML='双方同时选商品，互相可见';
 }
 
