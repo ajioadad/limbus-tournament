@@ -907,27 +907,7 @@ function rShop(){
  h+=sCol('A');h+='</div><div class="shop-column">';h+=sCol('B');h+='</div></div>';
  h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="sOK()">✅ 购买完成，进入第5局</button></div>';
  
- // Universal ban UI for all modes (except lottery)
- if(G.cur===4){
-  var brk=G.g5r;
-  if(brk!=='lottery'){
-   for(var s of ['A','B']){
-    var other=s==='A'?'B':'A';
-    if(G[s].ban&&!G[s]._banned&&G[other].fac){
-     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
-     h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会在对方选人列表出现）：</div>';
-     h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
-     for(var id of G[other].fac.ids){
-      h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
-      h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
-     }
-     h+='</div></div>';
-     break;
-    }
-   }
-  }
- }
-document.getElementById('mainArea').innerHTML=h;
+ 
  document.getElementById('statusArea').innerHTML='双方同时选商品，互相可见';
 }
 
