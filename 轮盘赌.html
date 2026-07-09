@@ -525,11 +525,11 @@ function selfSelect(side){
  for(var f of F_HIGH) opts.push({t:'上等',n:f.name});
  for(var f of F_MID) opts.push({t:'中等',n:f.name});
  for(var f of F_LOW) opts.push({t:'下等',n:f.name});
- h='<select onchange="setFac(\''+side+'\',this.value)" style="padding:6px;background:#0f172a;border:1px solid #1e293b;border-radius:6px;color:#e2e8f0;font-family:inherit;">';
- h+='<option value="">选择阵营...</option>';
- for(var o of opts) h+='<option value="'+o.n+'">['+o.t+'] '+o.n+'</option>';
- h+='</select>';
- return '<div class="draw-card"><div style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</div></div>';
+ var sel='<select onchange="setFac(\''+side+'\',this.value)" style="margin:8px 0;padding:6px;background:#0f172a;border:1px solid #1e293b;border-radius:6px;color:#e2e8f0;font-family:inherit;">';
+ sel+='<option value="">选择阵营...</option>';
+ for(var o of opts) sel+='<option value="'+o.n+'">['+o.t+'] '+o.n+'</option>';
+ sel+='</select>';
+ return '<div class="draw-card"><div style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</div>'+sel+'</div>';
 }
 function setFac(side,nm){
  for(var f of ALL_F){if(f.name===nm){G[side].fac=f;G[side].pk=[];return;}}
@@ -789,10 +789,12 @@ function rShop(){
 function sCol(side){
  var p=G[side];
  var its=[
- {k:'reroll',ic:'🪙',nm:'重抽币',pr:2},
- {k:'first',ic:'🎲',nm:'先手',pr:2},
- {k:'finger',ic:'☝️',nm:'命运手指',pr:6},
- {k:'slotup',ic:'⚡',nm:'行动槽增幅',pr:6},
+ {k:'reroll',ic:'🪙',nm:'重抽币',pr:2,desc:'全上等/下等/镜像/命运可用'},
+ {k:'first',ic:'🎲',nm:'先手',pr:2,desc:'全上等/下等/镜像/大乐透可用'},
+ {k:'finger',ic:'☝️',nm:'命运手指',pr:6,desc:'全部赛制可用'},
+ {k:'swap',ic:'🔄',nm:'换将',pr:6,desc:'大乐透无效'},
+ {k:'ban',ic:'🔫',nm:'禁人',pr:5,desc:'大乐透无效'},
+ {k:'selfpick',ic:'🏰',nm:'自选阵营',pr:8,desc:'大乐透无效'},
  ];
  var h='<div class="shop-section"><div class="shop-section-title">'+(side==='A'?'🔵 蓝方':'🔴 红方')+' · 正常商品</div>';
  for(var it of its){
@@ -801,6 +803,7 @@ function sCol(side){
  h+='<span class="si-icon">'+it.ic+'</span><span class="si-name">'+it.nm+'</span>';
  h+='<span class="si-price">'+it.pr+'金</span>';
  if(b) h+='<span class="si-check">✓</span>';
+ h+='<div style="font-size:10px;color:#64748b;margin-top:2px;">'+it.desc+'</div>';
  h+='</div>';
  }
  h+='</div>';
@@ -857,14 +860,16 @@ function sOK(){
  }
  if(p.first) p.first=true;
  if(p.reroll) p.reroll=true;
- if(p.slotup) p.su=true;
+ if(p.swap) p.swap=true;
+ if(p.ban) p.ban=true;
+ if(p.selfpick) p.selfpick=true;
  }
  // Show summary
  var sm='<div class="section"><div style="text-align:center;">';
  sm+='<div style="font-size:16px;font-weight:700;color:#f59e0b;margin-bottom:8px;">🛒 购买结果</div>';
  var itemsA=[],itemsB=[];
- var keys=['reroll','first','finger','slotup','rh','rl','rm','rlt','rf'];
- var nameMap={reroll:'重抽币',first:'先手',finger:'命运手指',slotup:'行动槽增幅',rh:'全上等',rl:'全下等',rm:'镜像对决',rlt:'大乐透',rf:'命运之手'};
+ var keys=['reroll','first','finger','swap','ban','selfpick','rh','rl','rm','rlt','rf'];
+ var nameMap={reroll:'重抽币',first:'先手',finger:'命运手指',swap:'换将',ban:'禁人',selfpick:'自选阵营',rh:'全上等',rl:'全下等',rm:'镜像对决',rlt:'大乐透',rf:'命运之手'};
  for(var k of keys){if(G.A[k])itemsA.push(nameMap[k]||k);if(G.B[k])itemsB.push(nameMap[k]||k);}
  sm+='<div style="display:flex;justify-content:center;gap:24px;font-size:13px;">';
  sm+='<div style="text-align:left;"><span style="color:#818cf8;">🔵 蓝方:</span> '+(itemsA.length?itemsA.join(', '):'无购买')+'</div>';
