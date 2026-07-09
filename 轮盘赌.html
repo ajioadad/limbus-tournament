@@ -433,6 +433,24 @@ function spin(){
 }
 
 // ═══ DRAW ═══
+
+function selfpickDropdown(side,pool){
+ if(!G[side].selfpick) return '';
+ var cur=G[side].fac?G[side].fac.name:'';
+ var sel='<select onchange="selfpickSelect(\''+side+'\',this.value)" style="margin:8px 0;padding:6px;background:#0f172a;border:1px solid #1e293b;border-radius:6px;color:#e2e8f0;font-family:inherit;"><option value="">选择阵营...</option>';
+ for(var f of pool) sel+='<option value="'+f.name+'"'+(f.name===cur?' selected':'')+'>'+f.name+'</option>';
+ sel+='</select>';
+ return sel;
+}
+function selfpickSelect(side,val){
+ for(var f of ALL_F){
+  if(f.name===val){
+   G[side].fac=fillFac(JSON.parse(JSON.stringify(f)));
+   G[side].pk=[];if(G[side].fi)G[side].pk.push(G[side].fi);
+   ren();return;
+  }
+ }
+}
 function rDraw(){
  var rk = G.cur<4?G.ws[G.cur]:G.g5r;
  if(!rk) rk='normal';
@@ -480,11 +498,15 @@ function rDraw(){
  }
  if(!replaced&&G.B.pk.length>0) G.B.pk[0]=fi;
  }
- h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div>';
+ if(isG5) h+=selfpickDropdown('A',ALL_F);
+ if(!isG5||!G.A.selfpick) h+='<div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
  if(isG5&&G.A.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'A\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div>';
  h+='<div style="font-size:22px;color:#475569;">⚡</div>';
- h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
+ h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div>';
+ if(isG5) h+=selfpickDropdown('B',ALL_F);
+ if(!isG5||!G.B.selfpick) h+='<div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
  if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div></div>';
  
@@ -493,7 +515,12 @@ function rDraw(){
  var mp=ALL_F.filter(function(f){return f.ids.length>=6;});
  var fm=pk(mp);
  G.A.fac=fillFac(JSON.parse(JSON.stringify(fm)));G.B.fac=fillFac(JSON.parse(JSON.stringify(fm)));
- h+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">🔄 同一阵营</div><div class="dc-faction">'+fm.name+'</div>'+fm.ids.length+'人</div></div>';
+ var mp2=ALL_F.filter(function(ff){return ff.ids.length>=6;});
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#a855f7;">🔄 同一阵营</div>';
+ if(isG5) h+=selfpickDropdown('A',mp2);
+ if(isG5) h+=selfpickDropdown('B',mp2);
+ if(!isG5||(!G.A.selfpick&&!G.B.selfpick)) h+='<div class="dc-faction">'+fm.name+'</div>'+fm.ids.length+'人';
+ h+='</div></div>';
  h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  } else if(rk==='normal'){
  // G5 normal: self-select tier
@@ -509,11 +536,15 @@ function rDraw(){
   G.B.fac=G.B.fac||fillFac(pk(tB));
  }
  var fA=G.A.fac,fB=G.B.fac;
- h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div><div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
+ h+='<div class="draw-grid"><div class="draw-card"><div style="color:#818cf8;">🔵 蓝方</div>';
+ if(isG5) h+=selfpickDropdown('A',tA);
+ if(!isG5||!G.A.selfpick) h+='<div class="dc-faction">'+fA.name+'</div>'+fA.ids.length+'人';
  if(isG5&&G.A.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'A\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div>';
  h+='<div style="font-size:22px;color:#475569;">VS</div>';
- h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
+ h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div>';
+ if(isG5) h+=selfpickDropdown('B',tB);
+ if(!isG5||!G.B.selfpick) h+='<div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
  if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div></div>';
  
