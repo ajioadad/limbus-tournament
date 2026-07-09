@@ -514,7 +514,24 @@ function rDraw(){
  h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
  if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
  h+='</div></div>';
- h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
+ 
+ if(G.cur===4){
+  for(var s of ['A','B']){
+   var other=s==='A'?'B':'A';
+   if(G[s].ban&&!G[s]._banned&&G[other].fac){
+    h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
+    h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 选择对方阵营要禁掉的人格（被禁的不会出现在对方选人列表）：</div>';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
+    for(var id of G[other].fac.ids){
+     h+='<div class="char-item" onclick="banCharDraw('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
+     h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
+    }
+    h+='</div></div>';
+    break;
+   }
+  }
+ }
+h+='<button class="btn btn-primary" onclick="goDice()">✅ 进入骰子阶段</button></div>';
  }
  document.getElementById('mainArea').innerHTML=h;
  document.getElementById('statusArea').innerHTML='';
@@ -752,22 +769,8 @@ function rDone(){
  }
  h+='</div>';
  
- // Ban/Swap: add UI before battle for G5
+ // Swap: add UI before battle for G5
  if(G.cur===4){
-  for(var s of ['A','B']){
-   var other=s==='A'?'B':'A';
-   if(G[s].ban&&!G[s]._banned){
-    h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
-    h+='<div style="font-size:14px;color:#ef4444;margin-bottom:8px;">🔫 '+(s==='A'?'蓝方':'红方')+' 点击对方人格禁掉（散人补）：</div>';
-    h+='<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">';
-    for(var id of G[other].pk){
-     h+='<div class="char-item" onclick="banChar('+id+',\''+s+'\')" style="cursor:pointer;border:1px solid #ef4444;">';
-     h+='<span class="ci-id">'+id+'</span><span class="ci-name">'+fn(id)+'</span></div>';
-    }
-    h+='</div></div>';
-    break;
-   }
-  }
   for(var s of ['A','B']){
    if(G[s].swap&&!G[s]._swapped){
     h+='<div style="margin-top:12px;text-align:center;border-top:1px solid #1e293b;padding-top:12px;">';
@@ -786,6 +789,16 @@ document.getElementById('mainArea').innerHTML=h;
 }
 
 
+function banCharDraw(id,side){
+ var other=side==='A'?'B':'A';
+ G[side]._bannedId=id;
+ G[side]._banned=true;
+ // Remove from opponent's faction ids
+ var idx=G[other].fac.ids.indexOf(id);
+ if(idx>=0) G[other].fac.ids.splice(idx,1);
+ t('🔫 已禁 '+fn(id));
+ ren();
+}
 function banChar(id,side){
  var other=side==='A'?'B':'A';
  var p=G[other];
