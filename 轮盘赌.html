@@ -367,7 +367,7 @@ var G={
 function res(){
  G.cur=0;G.phase='start';G.A={fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false};
  G.B={fac:null,pk:[],g:0,fi:null,ff:null,su:false,reroll:false,first:false};
- G.ws=[];G.lt=[];G.fp=null;G.g5r=null;
+ G.ws=[];G.lt=[];G.fp=null;G.g5r=null;G.A.streak=0;G.B.streak=0;
  // Generate game tabs
  var th='';for(var i=0;i<5;i++)th+='<div class="game-tab" onclick="sw('+i+')">第'+(i+1)+'场</div>';
  document.getElementById('gameTabs').innerHTML=th;
@@ -828,6 +828,9 @@ function gw(side){
  var rk=G.ws[G.cur];
  var bn=(rk==='lottery'||rk==='fate')?1:0;
  G[side].g+=3+bn;
+ G[side].streak++;
+ G[side==='A'?'B':'A'].streak=0;
+ if(G[side].streak>=2) G[side].g+=1;
  G[side==='A'?'B':'A'].g+=2;
  t((side==='A'?'蓝方':'红方')+'胜！+'+(3+bn)+'金'+(bn?'(含奖励)':''));
  G.cur++;
@@ -862,7 +865,7 @@ function sCol(side){
  {k:'reroll',ic:'🪙',nm:'重抽币',pr:2,desc:'全上等/下等/镜像/命运可用'},
  {k:'first',ic:'🎲',nm:'先手',pr:2,desc:'全上等/下等/镜像/大乐透可用'},
  {k:'finger',ic:'☝️',nm:'命运手指',pr:6,desc:'全部赛制可用'},
- {k:'swap',ic:'🔄',nm:'换将',pr:6,desc:'大乐透无效'},
+ {k:'swap',ic:'🔄',nm:'换将',pr:8,desc:'大乐透无效'},
 
  {k:'selfpick',ic:'🏰',nm:'自选阵营',pr:8,desc:'大乐透无效'},
  ];
