@@ -906,8 +906,7 @@ function rShop(){
  h+='<div class="shop-grid"><div class="shop-column">';
  h+=sCol('A');h+='</div><div class="shop-column">';h+=sCol('B');h+='</div></div>';
  h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="sOK()">✅ 购买完成，进入第5局</button></div>';
- 
- 
+ document.getElementById('mainArea').innerHTML=h;
  document.getElementById('statusArea').innerHTML='双方同时选商品，互相可见';
 }
 
