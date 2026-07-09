@@ -594,7 +594,7 @@ function selfSelect(side){
  return '<div class="draw-card"><div style="color:'+(side==='A'?'#818cf8':'#f472b6')+';">'+(side==='A'?'🔵 蓝方':'🔴 红方')+'</div>'+sel+'</div>';
 }
 function setFac(side,nm){
- for(var f of ALL_F){if(f.name===nm){G[side].fac=f;G[side].pk=[];return;}}
+ for(var f of ALL_F){if(f.name===nm){G[side].fac=fillFac(JSON.parse(JSON.stringify(f)));G[side].pk=[];ren();return;}}
 }
 
 function rerollFac(side){
