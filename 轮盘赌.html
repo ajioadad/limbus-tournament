@@ -437,6 +437,8 @@ function rDraw(){
  var rk = G.cur<4?G.ws[G.cur]:G.g5r;
  if(!rk) rk='normal';
  var isG5 = G.cur===4;
+ // Clear factions for new game (except G5 where they come from shop)
+ if(!isG5){G.A.fac=null;G.B.fac=null;}
  // Save finger picks before clearing for G5
  var fA=isG5&&G.A.fi?[G.A.fi]:[];
  var fB=isG5&&G.B.fi?[G.B.fi]:[];
@@ -483,7 +485,9 @@ function rDraw(){
  h+='</div>';
  h+='<div style="font-size:22px;color:#475569;">⚡</div>';
  h+='<div class="draw-card"><div style="color:#f472b6;">🔴 红方</div><div class="dc-faction">'+fB.name+'</div>'+fB.ids.length+'人';
- h+='<button class="btn btn-primary" onclick="goDone()">✅ 已自动选人，进入对战</button></div>';
+ if(isG5&&G.B.reroll) h+='<div style="margin-top:6px;"><button class="btn btn-warning" onclick="rerollFac(\'B\')" style="font-size:12px;padding:4px 10px;">🔄 重抽</button></div>';
+ h+='</div></div>';
+ h+='<div style="text-align:center;margin-top:12px;"><button class="btn btn-primary" onclick="goDone()">✅ 已自动选人，进入对战</button></div>';
  } else if(rk==='mirror'){
  var mp=ALL_F.filter(function(f){return f.ids.length>=6;});
  var fm=pk(mp);
@@ -901,6 +905,9 @@ function scUpd(){
 }
 
 // ═══ INIT ═══
+console.log('F_HIGH factions:', F_HIGH.map(function(f){return f.name;}));
+console.log('F_MID factions:', F_MID.map(function(f){return f.name;}));
+console.log('F_LOW factions:', F_LOW.map(function(f){return f.name;}));
 res();
 </script>
 </body>
